@@ -1,0 +1,298 @@
+/* ============================================
+   AGLIPAY CEMETERY - 3D MAP STYLESHEET
+   ============================================ */
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Poppins', Arial, sans-serif;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===== Utility ===== */
+.hidden {
+  display: none;
+}
+
+/* ===== HEADER ===== */
+.header {
+  background: linear-gradient(135deg, #2e6b3e, #1e4d2b);
+  color: #fff;
+  padding: 16px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+  z-index: 20;
+  box-shadow: 0 2px 20px rgba(0,0,0,0.15);
+}
+
+.header h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.header h1 span {
+  font-weight: 400;
+  opacity: 0.7;
+  font-size: 0.9rem;
+}
+
+.header .back-link {
+  color: #f0d68a;
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: opacity 0.2s;
+}
+
+.header .back-link:hover { opacity: 0.7; }
+
+/* ===== BODY LAYOUT ===== */
+.body-layout {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+
+/* ===== ASIDE INFO PANEL ===== */
+.info-aside {
+  width: 320px;
+  min-width: 320px;
+  background: #ffffff;
+  box-shadow: 2px 0 20px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  z-index: 10;
+  overflow-y: auto;
+}
+
+.info-aside .aside-header {
+  padding: 18px 20px 14px;
+  border-bottom: 3px solid #f0d68a;
+  background: #f8fbf8;
+}
+
+.info-aside .aside-header h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  color: #1e4d2b;
+}
+
+.info-aside .aside-header p {
+  font-size: 0.75rem;
+  color: #6b8a6b;
+  margin-top: 2px;
+}
+
+/* Loading */
+.aside-loading {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  color: #5a7a5a;
+  font-size: 0.9rem;
+  gap: 14px;
+}
+
+.spinner {
+  width: 34px;
+  height: 34px;
+  border: 3px solid #dde8dd;
+  border-top-color: #2e6b3e;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Person detail */
+.person-detail {
+  padding: 18px 20px;
+  flex: 1;
+}
+
+.person-detail .name-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem;
+  color: #1e4d2b;
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 2px dashed #dde8dd;
+  word-break: break-word;
+}
+
+.detail-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  background: #edf4ed;
+  border-radius: 8px;
+  font-size: 0.85rem;
+}
+
+.detail-row .label {
+  color: #6b8a6b;
+  font-weight: 600;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.detail-row .value {
+  color: #1a1a2e;
+  font-weight: 500;
+  text-align: right;
+}
+
+/* No result */
+.aside-empty {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 24px;
+  text-align: center;
+  color: #5a7a5a;
+  gap: 10px;
+}
+
+.aside-empty .icon { font-size: 2.5rem; }
+.aside-empty h3 { font-family: 'Playfair Display', serif; color: #1e4d2b; font-size: 1rem; }
+.aside-empty p { font-size: 0.8rem; }
+
+/* ===== NAVIGATION SECTION ===== */
+.nav-section {
+  margin-top: 16px;
+}
+
+.nav-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #dde8dd, transparent);
+  margin: 4px 0 12px;
+}
+
+.nav-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 0.78rem;
+}
+
+.nav-distance {
+  font-weight: 700;
+  color: #2e6b3e;
+  background: #edf4ed;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.78rem;
+}
+
+.nav-label {
+  color: #6b8a6b;
+  font-size: 0.7rem;
+}
+
+.nav-btn {
+  width: 100%;
+  padding: 12px 16px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #1e4d2b, #2e6b3e);
+  color: #fff;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(46, 107, 62, 0.25);
+}
+
+.nav-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(46, 107, 62, 0.35);
+}
+
+.nav-btn.active {
+  background: linear-gradient(135deg, #b91c1c, #991b1b);
+  box-shadow: 0 4px 15px rgba(185, 28, 28, 0.25);
+}
+
+.nav-btn.active:hover {
+  box-shadow: 0 6px 20px rgba(185, 28, 28, 0.35);
+}
+
+.nav-icon {
+  font-size: 1.1rem;
+}
+
+/* ===== 3D VIEWER ===== */
+.viewer {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+.viewer canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.viewer-hint {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(8px);
+  color: #fff;
+  padding: 8px 18px;
+  border-radius: 24px;
+  font-size: 0.8rem;
+  pointer-events: none;
+  border: 1px solid rgba(255,255,255,0.1);
+  white-space: nowrap;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .header { padding: 12px 18px; }
+  .header h1 { font-size: 1.1rem; }
+
+  .body-layout { flex-direction: column; }
+
+  .info-aside {
+    width: 100%;
+    min-width: unset;
+    max-height: 40vh;
+  }
+
+  .viewer { height: 60vh; }
+
+  .detail-row {
+    padding: 6px 10px;
+    font-size: 0.8rem;
+  }
+}

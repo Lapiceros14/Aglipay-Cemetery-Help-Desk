@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AGLIPAY CEMETERY HELP DESK</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+    <div class="container">
+
+    <header>
+        <h1>Aglipay Cemetery</h1>
+        <p class="subtitle">Find your loved ones &amp; locate their resting place</p>
+    </header>
+
+    <div class="layout">
+
+        <!-- LEFT ASIDE: Search Results / Choices -->
+        <aside class="aside-left">
+            <h3 class="aside-title">Search Results</h3>
+            <div id="choices"></div>
+        </aside>
+
+        <!-- CENTER: Search Box + Grave Details -->
+        <main class="center-col">
+            <nav>
+                <div class="search-box">
+                    <input
+                        type="text"
+                        id="search"
+                        placeholder="Enter deceased name...">
+                    <button onclick="searchPerson()">
+                        Search
+                    </button>
+                </div>
+            </nav>
+
+            <article id="result" class="result-card hidden">
+                <h2>Grave Details</h2>
+
+                <div class="info">
+                    <p><strong>Name</strong> <span id="name"></span></p>
+                    <p><strong>Birth</strong> <span id="birth"></span></p>
+                    <p><strong>Death</strong> <span id="death"></span></p>
+                    <p><strong>Section</strong> <span id="section"></span></p>
+                    <p><strong>Row</strong> <span id="row"></span></p>
+                    <p><strong>Column</strong> <span id="column"></span></p>
+                </div>
+
+                <button class="map-btn" onclick="viewMap()">
+                    View 3D Map
+                </button>
+            </article>
+        </main>
+
+        <!-- RIGHT ASIDE: Quick Info -->
+        <aside class="aside-right">
+            <h3 class="aside-title">Cemetery Info</h3>
+            <div class="aside-card">
+                <p><strong>📍 Location</strong></p>
+                <p>H329+3XX, M. Lozada St, Pateros, Metro Manila</p>
+            </div>
+            <div class="aside-card">
+                <p><strong>🕐 Operational Hours</strong></p>
+                <p>TBA</p>
+            </div>
+            <div class="aside-card">
+                <p><strong>📞 Contact</strong></p>
+                <p>09926870792</p>
+            </div>
+            <div class="aside-card legend">
+                <p><strong>Legend</strong></p>
+                <p><span class="dot dot-occupied"></span> Occupied</p>
+                <p><span class="dot dot-available"></span> Available</p>
+            </div>
+        </aside>
+
+    </div><!-- /.layout -->
+
+    <footer>
+        <p>Aglipay Cemetery Help Desk &copy; 2026</p>
+    </footer>
+
+<script src="script.js"></script>
+
+</body>
+</html>

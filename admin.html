@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aglipay Cemetery - Admin Panel</title>
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+    <div class="container admin-wrap">
+
+        <div class="admin-header">
+            <h1 class="admin-title">Aglipay Cemetery</h1>
+            <a class="back-link" href="index.html">← Back to Help Desk</a>
+        </div>
+
+        <!-- Status message -->
+        <div id="status" class="status"></div>
+
+        <!-- ===== INSERT FORM ===== -->
+        <section class="admin-card">
+            <h2>➕ Add New Grave Record</h2>
+            <form id="insertForm" autocomplete="off">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="Fullname">Full Name</label>
+                        <input type="text" id="Fullname" name="Fullname" placeholder="Full name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="Birthdate">Birthdate</label>
+                        <input type="text" id="Birthdate" name="Birthdate" placeholder="e.g. January 2 2000" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="Deathdate">Deathdate</label>
+                        <input type="text" id="Deathdate" name="Deathdate" placeholder="e.g. January 2 2000" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="Phase">Section / Phase</label>
+                        <input type="number" id="Phase" name="Phase" placeholder="e.g. 1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="Column">Column</label>
+                        <input type="number" id="Column" name="Column" placeholder="e.g. 2" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="Row">Row</label>
+                        <input type="number" id="Row" name="Row" placeholder="e.g. 3" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="X">X Coordinate</label>
+                        <input type="number" step="any" id="X" name="X" placeholder="e.g. -39.31" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="Y">Y Coordinate</label>
+                        <input type="number" step="any" id="Y" name="Y" placeholder="e.g. 5.94" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="Z">Z Coordinate</label>
+                        <input type="number" step="any" id="Z" name="Z" placeholder="e.g. 33.27" required>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Save Record</button>
+                    <button type="button" class="btn btn-outline" onclick="resetForm()">Reset</button>
+                </div>
+            </form>
+        </section>
+
+        <!-- ===== RECORDS TABLE ===== -->
+        <section class="admin-card">
+            <div class="admin-header admin-header-tight">
+                <h2 class="no-margin">📋 Grave Records</h2>
+                <span id="recordsCount" class="records-count">Loading records...</span>
+            </div>
+
+            <div class="table-wrap">
+                <table class="records-table">
+                    <thead>
+                        <tr>
+                            <th>UID</th>
+                            <th>Fullname</th>
+                            <th>Birth</th>
+                            <th>Death</th>
+                            <th>Phase</th>
+                            <th>Column</th>
+                            <th>Row</th>
+                            <th>X</th>
+                            <th>Y</th>
+                            <th>Z</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="recordsBody">
+                        <tr><td colspan="11" class="table-message">Loading...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="export-bar">
+                <a class="btn btn-excel" href="admin_export_excel.php">⬇ Export to Excel</a>
+                <a class="btn btn-pdf" href="admin_export_pdf.php">⬇ Export to PDF</a>
+                <button type="button" class="btn btn-outline" onclick="loadRecords()">↻ Refresh</button>
+            </div>
+        </section>
+
+    </div>
+
+<script>
+        // ============================================
+        // ADMIN PANEL JAVASCRIPT
+        // This controls the admin page tasks:
+        //   1. Show a message to the admin
+        //   2. Load all records into the table
+        //   3. Delete a record
+        //   4. Add a new record (insert form)
+        // ============================================
+
+        // ---------- SHOW A MESSAGE ----------
+        // "type" is either "success" (green) or "error" (red).
+        function showStatus(message, type) {
+            const el = document.getElementById('status');   // the message box
+            el.className = 'status ' + (type === 'success' ? 'success' : 'error');
+            el.textContent = message;                       // put the text in the box
+            setTimeout(() => { el.className = 'status'; }, 4000); // clear it after 4 seconds
+        }
+
+        // ---------- RESET THE FORM ----------
+        // Clears everything the admin typed in the add-record form.
+        function resetForm() {
+            document.getElementById('insertForm').reset();
+        }
+
+        // ---------- LOAD ALL RECORDS ----------
+        // Asks the server for all records and shows them in the table.
+        async function loadRecords() {
+            const tbody = document.getElementById('recordsBody');   // the table body
+            const countEl = document.getElementById('recordsCount'); // the "X record(s)" text
+
+            try {
+                // Ask the server for all records.
+                const res = await fetch('admin_records.php');
+                const data = await res.json();   // turn the answer into an object
+
+                // If the server said "not ok", show an error message.
+                if (!data.success) {
+                    tbody.innerHTML = '<tr><td colspan="11" class="table-error">Failed to load records.</td></tr>';
+                    return;
+                }
+
+                // Get the list of records (or an empty list if none).
+                const records = data.records || [];
+                countEl.textContent = records.length + ' record(s)';
+
+                // If there are no records, show a small message.
+                if (records.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="11" class="table-message">No records found.</td></tr>';
+                    return;
+                }
+
+                // Turn the list of records into table rows.
+                // For each record (r), we make one <tr> (row).
+                tbody.innerHTML = records.map(r => `
+                    <tr>
+                        <td>${r.UID}</td>
+                        <td>${escapeHtml(r.Fullname)}</td>
+                        <td>${escapeHtml(r.Birthdate)}</td>
+                        <td>${escapeHtml(r.Deathdate)}</td>
+                        <td>${r.Phase}</td>
+                        <td>${r.Column}</td>
+                        <td>${r.Row}</td>
+                        <td>${r.X}</td>
+                        <td>${r.Y}</td>
+                        <td>${r.Z}</td>
+                        <td>
+                            <button type="button" class="btn btn-delete" onclick="deleteRecord(${r.UID})">Delete</button>
+                        </td>
+                    </tr>
+                `).join('');
+            } catch (err) {
+                // Something went wrong (like no internet to the server).
+                console.error(err);
+                tbody.innerHTML = '<tr><td colspan="11" class="table-error">Error loading records.</td></tr>';
+            }
+        }
+
+        // ---------- DELETE A RECORD ----------
+        // Asks the server to delete the record with the given UID.
+        async function deleteRecord(uid) {
+            // Ask the admin to confirm first.
+            if (!confirm('Are you sure you want to delete record UID: ' + uid + '?')) {
+                return;   // stop if they said "no"
+            }
+
+            try {
+                // Send a "delete" request to the server.
+                const res = await fetch('admin_delete.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ UID: uid })   // send the UID as JSON
+                });
+                const data = await res.json();   // get the server's answer
+
+                // If it worked, tell the admin and reload the table.
+                if (data.success) {
+                    showStatus(data.message, 'success');
+                    loadRecords();
+                } else {
+                    showStatus(data.message || 'Delete failed.', 'error');
+                }
+            } catch (err) {
+                console.error(err);
+                showStatus('An error occurred while deleting.', 'error');
+            }
+        }
+
+        // ---------- ESCAPE HTML ----------
+        // This changes special characters so that a name like
+        // "Tom & Jerry" or "<script>" cannot break our page.
+        function escapeHtml(str) {
+            if (str === null || str === undefined) return '';
+            return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '<')
+                .replace(/>/g, '>')
+                .replace(/"/g, '"')
+                .replace(/'/g, '&#039;');
+        }
+
+        // ---------- ADD A NEW RECORD ----------
+        // This runs when the admin clicks "Save Record".
+        document.getElementById('insertForm').addEventListener('submit', async function (e) {
+            e.preventDefault();   // stop the page from reloading
+
+            // Collect the values the admin typed into the form.
+            const payload = {
+                Fullname: document.getElementById('Fullname').value.trim(),
+                Birthdate: document.getElementById('Birthdate').value.trim(),
+                Deathdate: document.getElementById('Deathdate').value.trim(),
+                Phase: document.getElementById('Phase').value.trim(),
+                Column: document.getElementById('Column').value.trim(),
+                Row: document.getElementById('Row').value.trim(),
+                X: document.getElementById('X').value.trim(),
+                Y: document.getElementById('Y').value.trim(),
+                Z: document.getElementById('Z').value.trim()
+            };
+
+            try {
+                // Send the values to the server to be saved.
+                const res = await fetch('admin_insert.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const data = await res.json();   // get the server's answer
+
+                // If it worked, clear the form and reload the table.
+                if (data.success) {
+                    showStatus(data.message + ' (UID: ' + data.uid + ')', 'success');
+                    resetForm();
+                    loadRecords();
+                } else {
+                    showStatus(data.message || 'Insert failed.', 'error');
+                }
+            } catch (err) {
+                console.error(err);
+                showStatus('An error occurred while saving.', 'error');
+            }
+        });
+
+        // ---------- START UP ----------
+        // Load the records as soon as the page opens.
+        loadRecords();
+    </script>
+
+</body>
+</html>

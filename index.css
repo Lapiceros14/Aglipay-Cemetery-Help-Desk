@@ -1,0 +1,532 @@
+/* ============================================
+   AGLIPAY CEMETERY HELP DESK - INDEX STYLESHEET
+   ============================================ */
+
+/* ---------- Google Fonts Import ---------- */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* ---------- CSS Variables / Theme Colors ---------- */
+:root {
+    --primary: #2e6b3e;
+    --primary-dark: #1e4d2b;
+    --primary-light: #4a9e5e;
+    --accent: #d4af37;
+    --accent-light: #f0d68a;
+    --dark: #1a1a2e;
+    --dark-soft: #3a5a40;
+    --text-muted: #5a7a5a;
+    --text-subtle: #7a9a7a;
+    --text-blend: #9ab89a;
+    --gray: #6b8a6b;
+    --gray-light: #dde8dd;
+    --gray-bg: #edf4ed;
+    --white: #ffffff;
+    --glass-bg: rgba(255, 255, 255, 0.25);
+    --glass-border: rgba(255, 255, 255, 0.35);
+    --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
+    --shadow-md: 0 8px 30px rgba(0,0,0,0.12);
+    --shadow-lg: 0 15px 50px rgba(0,0,0,0.2);
+    --radius: 12px;
+    --radius-lg: 20px;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ---------- Reset & Base ---------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', Arial, sans-serif;
+    background: var(--gray-bg);
+}
+
+/* ---------- Container ---------- */
+.container {
+    width: 95%;
+    max-width: 1280px;
+    margin: 40px auto;
+    padding: 0 15px;
+}
+
+/* ---------- 3-Column Layout ---------- */
+.layout {
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+}
+
+/* Left Aside */
+.aside-left {
+    flex: 0 0 280px;
+    min-width: 0;
+}
+
+/* Center Column */
+.center-col {
+    flex: 1;
+    min-width: 0;
+}
+
+/* Right Aside */
+.aside-right {
+    flex: 0 0 240px;
+    min-width: 0;
+}
+
+/* ---------- Aside Shared Styles ---------- */
+.aside-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    color: var(--dark-soft);
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 5px solid var(--accent-light);
+    letter-spacing: 0.5px;
+}
+
+.aside-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 12px 16px;
+    margin-bottom: 12px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--gray-light);
+    font-size: 0.85rem;
+    line-height: 1.6;
+}
+
+.aside-card p {
+    margin: 0;
+}
+
+.aside-card p strong {
+    color: var(--primary-dark);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Legend dots */
+.legend p {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+    flex-shrink: 0;
+}
+
+.dot-occupied {
+    background: #2e6b3e;
+}
+
+.dot-available {
+    background: #d4af37;
+}
+
+/* ---------- Header with Decorative Line ---------- */
+h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 4.5rem;
+    font-weight: 700;
+    text-align: center;
+    color: var(--dark-soft);
+    margin-bottom: 5px;
+    letter-spacing: 1px;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+h1::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--primary-light));
+    margin: 12px auto 0;
+    border-radius: 2px;
+}
+
+.subtitle {
+    text-align: center;
+    color: var(--text-muted);
+    margin: 0 0 35px 0;
+    font-size: 1rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* ---------- Search Box ---------- */
+.search-box {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+    background: var(--white);
+    padding: 6px 6px 6px 20px;
+    border-radius: 50px;
+    box-shadow: var(--shadow-md);
+    border: 1px solid rgba(46, 107, 62, 0.1);
+    transition: var(--transition);
+}
+
+.search-box:focus-within {
+    border-color: var(--primary-light);
+    box-shadow: 0 8px 30px rgba(46, 107, 62, 0.15);
+    transform: translateY(-2px);
+}
+
+.search-box input {
+    flex: 1;
+    padding: 14px 10px;
+    border: none;
+    background: transparent;
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+    color: var(--dark-soft);
+    outline: none;
+}
+
+.search-box input::placeholder {
+    color: #b0b0b0;
+    font-weight: 300;
+}
+
+.search-box button {
+    padding: 14px 32px;
+    border: none;
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: var(--white);
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: 0.5px;
+    transition: var(--transition);
+    white-space: nowrap;
+    box-shadow: 0 4px 15px rgba(46, 107, 62, 0.3);
+}
+
+.search-box button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(46, 107, 62, 0.4);
+    background: linear-gradient(135deg, var(--primary-dark), #143a20);
+}
+
+.search-box button:active {
+    transform: translateY(0);
+}
+
+/* ---------- Choices Container ---------- */
+#choices {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 25px;
+}
+
+#choices button,
+.choice-btn {
+    background: var(--white);
+    border: 1px solid var(--gray-light);
+    border-left: 5px solid var(--primary-light);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    text-align: left;
+    cursor: pointer;
+    font-size: 15px;
+    font-family: 'Poppins', sans-serif;
+    color: var(--dark-soft);
+    transition: var(--transition);
+    box-shadow: var(--shadow-sm);
+    line-height: 1.6;
+    width: 100%;
+}
+
+#choices button:hover,
+.choice-btn:hover {
+    background: linear-gradient(135deg, #f8fff8, #f0f7f0);
+    border-left-width: 7px;
+    border-left-color: var(--primary);
+    transform: translateX(8px);
+    box-shadow: var(--shadow-md);
+}
+
+#choices button strong,
+.choice-btn strong {
+    font-size: 18px;
+    color: var(--primary-dark);
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* ---------- Result Card ---------- */
+.result-card {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    padding: 30px 35px;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid rgba(46, 107, 62, 0.08);
+    position: relative;
+    overflow: hidden;
+}
+
+.result-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary), var(--accent), var(--primary-light));
+}
+
+.result-card h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    color: var(--primary-dark);
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 2px dashed var(--gray-light);
+    text-align: center;
+}
+
+/* ---------- Grave Details Grid ---------- */
+.info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.info p {
+    margin: 0;
+    font-size: 15px;
+    padding: 12px 16px;
+    background: var(--gray-bg);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.info p strong {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--gray);
+    font-weight: 600;
+}
+
+.info p span {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--dark-soft);
+}
+
+/* ---------- Map Button ---------- */
+.map-btn {
+    width: 100%;
+    margin-top: 25px;
+    padding: 16px;
+    background: linear-gradient(135deg, #2c7be5, #1a5bbf);
+    color: var(--white);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: 0.5px;
+    transition: var(--transition);
+    box-shadow: 0 4px 15px rgba(44, 123, 229, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.map-btn::before {
+    content: '\01F4CD';
+    font-size: 18px;
+}
+
+.map-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(44, 123, 229, 0.4);
+    background: linear-gradient(135deg, #1a5bbf, #0f3f8a);
+}
+
+.map-btn:active {
+    transform: translateY(0);
+}
+
+/* ---------- Utility Classes ---------- */
+.hidden {
+    display: none !important;
+}
+
+/* ---------- Header BG Fade ---------- */
+header {
+    position: relative;
+    padding: 40px 20px 60px;
+    margin-bottom: 30px;
+    background: rgba(246, 244, 244, 0.1);
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    padding-left: calc(50vw - 50% + 20px);
+    padding-right: calc(50vw - 50% + 20px);
+}
+
+header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    pointer-events: none;
+}
+
+footer {
+    text-align: center;
+    color: var(--dark-soft);
+    font-size: 1.5rem;
+    margin-top: 40px;
+    padding: 20px 0;
+}
+
+/* ---------- Loading Spinner ---------- */
+.loading {
+    text-align: center;
+    padding: 20px;
+    color: var(--gray);
+}
+
+.loading::after {
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid var(--gray-light);
+    border-top-color: var(--primary);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin-left: 8px;
+    vertical-align: middle;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ---------- Responsive Design ---------- */
+
+/* Tablet: collapse asides */
+@media (max-width: 1024px) {
+    .layout {
+        flex-direction: column;
+    }
+
+    .aside-left,
+    .aside-right {
+        flex: 0 0 auto;
+        width: 100%;
+    }
+
+    .aside-left #choices {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .aside-left #choices button,
+    .aside-left .choice-btn {
+        flex: 1 1 200px;
+        padding: 14px 18px;
+        font-size: 14px;
+    }
+
+    .aside-right .aside-card {
+        display: inline-block;
+        width: auto;
+        margin-right: 10px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+    .container {
+        width: 95%;
+        margin: 20px auto;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    .subtitle {
+        font-size: 0.8rem;
+    }
+
+    .search-box {
+        flex-direction: column;
+        padding: 15px;
+        border-radius: var(--radius);
+        gap: 12px;
+    }
+
+    .search-box input {
+        padding: 12px;
+        background: var(--gray-bg);
+        border-radius: 8px;
+    }
+
+    .search-box button {
+        width: 100%;
+        padding: 14px;
+    }
+
+    .result-card {
+        padding: 20px;
+    }
+
+    .info {
+        grid-template-columns: 1fr;
+    }
+
+    .info p {
+        padding: 10px 14px;
+    }
+
+    #choices button,
+    .choice-btn {
+        padding: 14px 16px;
+        font-size: 14px;
+    }
+
+    .aside-right .aside-card {
+        display: block;
+        width: 100%;
+        margin-right: 0;
+    }
+}
+
+@media (min-width: 601px) and (max-width: 900px) {
+    .container {
+        width: 88%;
+    }
+
+    h1 {
+        font-size: 2.2rem;
+    }
+}
