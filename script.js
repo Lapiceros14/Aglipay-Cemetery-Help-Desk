@@ -2,18 +2,16 @@
 // SUPABASE CONNECTION
 // ============================================
 
-const supabaseUrl =
-    'https://urfmjczbaoavwmhrirmt.supabase.co';
+const supabaseUrl = "https://urfmjczbaoavwmhrirmt.supabase.co";
 
-const supabaseKey =
-    'YOUR_PUBLISHABLE_KEY';
+const supabaseKey = "sb_publishable_JXMzmYxKQhuD2uh-mmPbrQ_Mo4zgLgV";
 
-const supabase =
-    window.supabase.createClient(
-        supabaseUrl,
-        supabaseKey
-    );
+const supabase = window.supabase.createClient(
+    supabaseUrl,
+    supabaseKey
+);
 
+let selectedName = null;
 
 // ============================================
 // SELECTED PERSON
@@ -28,121 +26,64 @@ let selectedName = null;
 
 async function searchPerson() {
 
-    // Get what the user typed into the search box.
-    const input =
-        document.getElementById("search").value.trim();
+    const input = document
+        .getElementById("search")
+        .value
+        .trim();
 
-
-    // Don't search if the input is empty.
     if (input === "") {
-
         alert("Please enter a name.");
-
         return;
     }
 
+    const { data: people, error } = await supabase
+        .from("cemetery_tb")
+        .select("*")
+        .ilike("Fullname", `%${input}%`);
 
-    try {
-
-        // ========================================
-        // SEARCH SUPABASE DATABASE
-        // ========================================
-
-        const { data: people, error } =
-            await supabase
-                .from("cemetery_tb")
-                .select("*")
-                .ilike("Fullname", `%${input}%`);
-
-
-        // If Supabase returns an error.
-        if (error) {
-
-            console.error("Supabase error:", error);
-
-            alert("Database connection failed.");
-
-            return;
-        }
-
-
-        // ========================================
-        // GET SEARCH RESULTS CONTAINER
-        // ========================================
-
-        const choices =
-            document.getElementById("choices");
-
-
-        // Clear old search results.
-        choices.innerHTML = "";
-
-
-        // Hide details card.
-        document
-            .getElementById("result")
-            .classList.add("hidden");
-
-
-        // ========================================
-        // DISPLAY RESULTS
-        // ========================================
-
-        if (people && people.length > 0) {
-
-            people.forEach(person => {
-
-                // Create button for each person.
-                const button =
-                    document.createElement("button");
-
-
-                button.className = "choice-btn";
-
-
-                // Display person's information.
-                button.innerHTML =
-                    "<strong>" +
-                    person.Fullname +
-                    "</strong><br>" +
-
-                    "Birth: " +
-                    person.Birthdate +
-                    "<br>" +
-
-                    "Death: " +
-                    person.Deathdate;
-
-
-                // When clicked, show details.
-                button.onclick = function() {
-
-                    showDetails(person);
-
-                };
-
-
-                // Add button to results.
-                choices.appendChild(button);
-
-            });
-
-        } else {
-
-            // No matching record.
-            alert("No record found.");
-
-        }
-
-
-    } catch (error) {
-
-        console.error("Database error:", error);
-
+    if (error) {
+        console.error(error);
         alert("Database connection failed.");
-
+        return;
     }
 
+    const choices =
+        document.getElementById("choices");
+
+    choices.innerHTML = "";
+
+    document
+        .getElementById("result")
+        .classList
+        .add("hidden");
+
+    if (people.length > 0) {
+
+        people.forEach(person => {
+
+            const button =
+                document.createElement("button");
+
+            button.className = "choice-btn";
+
+            button.innerHTML =
+                "<strong>" + person.Fullname + "</strong><br>" +
+                "Birth: " + person.Birthdate + "<br>" +
+                "Death: " + person.Deathdate;
+
+            button.onclick = function() {
+                showDetails(person);
+            };
+
+            choices.appendChild(button);
+
+        });
+
+    } else {
+
+        alert("No record found.");
+
+    }
 }
 
 
