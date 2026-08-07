@@ -1,7 +1,7 @@
 // ============================================
 // SUPABASE CONNECTION
 // ============================================
-
+console.log("SCRIPT.JS IS WORKING");
 const supabaseUrl = "https://urfmjczbaoavwmhrirmt.supabase.co";
 
 const supabaseKey = "sb_publishable_JXMzmYxKQhuD2uh-mmPbrQ_Mo4zgLgV";
