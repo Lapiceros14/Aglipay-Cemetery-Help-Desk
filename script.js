@@ -8,9 +8,9 @@ const supabaseUrl =
     "https://urfmjczbaoavwmhrirmt.supabase.co";
 
 const supabaseKey =
-    "sb_publishable_JXMzmYxKQhuD2uh-mmPbrQ_Mo4zgLgV";
+    "YOUR_SB_PUBLISHABLE_KEY";
 
-const supabase =
+const db =
     window.supabase.createClient(
         supabaseUrl,
         supabaseKey
@@ -33,23 +33,15 @@ async function searchPerson() {
     const input =
         document.getElementById("search").value.trim();
 
-    // Check if search box is empty
     if (input === "") {
-
         alert("Please enter a name.");
-
         return;
     }
 
     console.log("Searching for:", input);
 
-
-    // ========================================
-    // SEARCH SUPABASE
-    // ========================================
-
     const { data: people, error } =
-        await supabase
+        await db
             .from("cemetery_tb")
             .select("*")
             .ilike(
@@ -57,17 +49,9 @@ async function searchPerson() {
                 `%${input}%`
             );
 
-
-    // ========================================
-    // CHECK FOR DATABASE ERROR
-    // ========================================
-
     if (error) {
 
-        console.error(
-            "Supabase error:",
-            error
-        );
+        console.error("Supabase error:", error);
 
         alert(
             "Database connection failed:\n" +
@@ -77,50 +61,29 @@ async function searchPerson() {
         return;
     }
 
-
-    console.log(
-        "Search results:",
-        people
-    );
-
-
-    // ========================================
-    // GET SEARCH RESULTS CONTAINER
-    // ========================================
+    console.log("Search results:", people);
 
     const choices =
         document.getElementById("choices");
 
-
-    // Clear previous results
     choices.innerHTML = "";
 
-
-    // Hide the details card
     document
         .getElementById("result")
         .classList
         .add("hidden");
 
 
-    // ========================================
-    // DISPLAY SEARCH RESULTS
-    // ========================================
-
     if (people && people.length > 0) {
 
         people.forEach(person => {
 
-            // Create button
             const button =
                 document.createElement("button");
-
 
             button.className =
                 "choice-btn";
 
-
-            // Display person's information
             button.innerHTML =
                 "<strong>" +
                 person.Fullname +
@@ -134,10 +97,6 @@ async function searchPerson() {
                 person.Deathdate;
 
 
-            // =================================
-            // WHEN RESULT IS CLICKED
-            // =================================
-
             button.onclick = function () {
 
                 showDetails(person);
@@ -145,15 +104,12 @@ async function searchPerson() {
             };
 
 
-            // Add button to results
             choices.appendChild(button);
 
         });
 
-
     } else {
 
-        // No records found
         alert("No record found.");
 
     }
@@ -162,38 +118,25 @@ async function searchPerson() {
 
 
 // ============================================
-// SHOW DETAILS OF SELECTED PERSON
+// SHOW DETAILS
 // ============================================
 
 function showDetails(person) {
 
-    // Remember selected person's name
     selectedName =
         person.Fullname;
 
-
-    // ========================================
-    // CLEAR SEARCH RESULTS
-    // ========================================
 
     document
         .getElementById("choices")
         .innerHTML = "";
 
 
-    // ========================================
-    // SHOW DETAILS CARD
-    // ========================================
-
     document
         .getElementById("result")
         .classList
         .remove("hidden");
 
-
-    // ========================================
-    // DISPLAY PERSONAL INFORMATION
-    // ========================================
 
     document
         .getElementById("name")
@@ -213,10 +156,6 @@ function showDetails(person) {
         person.Deathdate;
 
 
-    // ========================================
-    // DISPLAY GRAVE LOCATION
-    // ========================================
-
     document
         .getElementById("section")
         .innerHTML =
@@ -235,10 +174,6 @@ function showDetails(person) {
         person.Column;
 
 
-    // ========================================
-    // SAVE 3D COORDINATES
-    // ========================================
-
     window._lastX =
         parseFloat(person.X) || 0;
 
@@ -251,10 +186,6 @@ function showDetails(person) {
         parseFloat(person.Z) || 0;
 
 
-    // ========================================
-    // DEBUG INFORMATION
-    // ========================================
-
     console.log(
         "Selected person:",
         person
@@ -263,23 +194,20 @@ function showDetails(person) {
 
     console.log(
         "Coordinates:",
-        {
-            X: window._lastX,
-            Y: window._lastY,
-            Z: window._lastZ
-        }
+        window._lastX,
+        window._lastY,
+        window._lastZ
     );
 
 }
 
 
 // ============================================
-// VIEW THE 3D MAP
+// VIEW 3D MAP
 // ============================================
 
 function viewMap() {
 
-    // Check if a person was selected
     if (selectedName === null) {
 
         alert(
@@ -290,33 +218,21 @@ function viewMap() {
     }
 
 
-    // ========================================
-    // GET SAVED COORDINATES
-    // ========================================
-
     const x =
         window._lastX || 0;
 
-
     const y =
         window._lastY || 0;
-
 
     const z =
         window._lastZ || 0;
 
 
-    // ========================================
-    // CREATE MAP URL
-    // ========================================
-
     const mapURL =
         "map.html" +
 
         "?name=" +
-        encodeURIComponent(
-            selectedName
-        ) +
+        encodeURIComponent(selectedName) +
 
         "&x=" +
         encodeURIComponent(x) +
@@ -333,10 +249,6 @@ function viewMap() {
         mapURL
     );
 
-
-    // ========================================
-    // OPEN 3D MAP
-    // ========================================
 
     window.location.href =
         mapURL;
