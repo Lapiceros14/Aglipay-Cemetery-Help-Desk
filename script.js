@@ -8,7 +8,7 @@ const supabaseUrl =
     "https://urfmjczbaoavwmhrirmt.supabase.co";
 
 const supabaseKey =
-    "YOUR_SB_PUBLISHABLE_KEY";
+    "sb_publishable_JXMzmYxKQhuD2uh-mmPbrQ_Mo4zgLgV";
 
 const db =
     window.supabase.createClient(
