@@ -17,7 +17,7 @@ let selectedName = null;
 // SELECTED PERSON
 // ============================================
 
-let selectedName = null;
+
 
 
 // ============================================
