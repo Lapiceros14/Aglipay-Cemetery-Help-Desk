@@ -1,503 +1,1855 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Aglipay Cemetery - 3D Map</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+>
+
 <link rel="stylesheet" href="map.css">
+
 </head>
+
+
 <body>
 
-  <!-- ===== HEADER: Cemetery Name ===== -->
-  <header class="header">
-    <h1>Aglipay Cemetery <span>· 3D Interactive Map</span></h1>
-    <a class="back-link" href="index.html">← Back to Search</a>
-  </header>
 
-  <!-- ===== BODY: Aside + 3D Viewer ===== -->
-  <div class="body-layout">
+<!-- =====================================================
+     HEADER
+===================================================== -->
 
-    <!-- Aside: Person Info -->
-    <aside class="info-aside" id="infoAside">
-      <div class="aside-header">
-        <h2>🪦 Grave Information</h2>
-        <p>Searched person details</p>
-      </div>
+<header class="header">
 
-      <!-- Loading -->
-      <div class="aside-loading" id="loadingState">
-        <div class="spinner"></div>
-        <span>Loading...</span>
-      </div>
+    <h1>
+        Aglipay Cemetery
+        <span>· 3D Interactive Map</span>
+    </h1>
 
-      <!-- Person Detail -->
-      <div class="person-detail hidden" id="personDetail">
-        <div class="name-title" id="personName"></div>
-        <div class="detail-list">
-          <div class="detail-row">
-            <span class="label">Birth</span>
-            <span class="value" id="personBirth">—</span>
-          </div>
-          <div class="detail-row">
-            <span class="label">Death</span>
-            <span class="value" id="personDeath">—</span>
-          </div>
-          <div class="detail-row">
-            <span class="label">Section</span>
-            <span class="value" id="personSection">—</span>
-          </div>
-          <div class="detail-row">
-            <span class="label">Row</span>
-            <span class="value" id="personRow">—</span>
-          </div>
-          <div class="detail-row">
-            <span class="label">Column</span>
-            <span class="value" id="personColumn">—</span>
-          </div>
+    <a
+        class="back-link"
+        href="index.html"
+    >
+        ← Back to Search
+    </a>
+
+</header>
+
+
+
+<!-- =====================================================
+     MAIN LAYOUT
+===================================================== -->
+
+<div class="body-layout">
+
+
+    <!-- =================================================
+         INFORMATION PANEL
+    ================================================== -->
+
+    <aside
+        class="info-aside"
+        id="infoAside"
+    >
+
+        <div class="aside-header">
+
+            <h2>
+                🪦 Grave Information
+            </h2>
+
+            <p>
+                Searched person details
+            </p>
+
         </div>
 
-        <!-- Navigation Section -->
-        <div class="nav-section hidden" id="navSection">
-          <div class="nav-divider"></div>
-          <div class="nav-info">
-            <span class="nav-distance" id="distInfo">—</span>
-            <span class="nav-label" id="navStatus">Navigation off</span>
-          </div>
-          <button class="nav-btn hidden" id="navToggleBtn" onclick="toggleNavigation()">
-            <span class="nav-icon">🧭</span>
-            <span>Show Direction</span>
-          </button>
-        </div>
-      </div>
 
-      <!-- Empty -->
-      <div class="aside-empty" id="emptyState">
-        <div class="icon">📭</div>
-        <h3>No Person Selected</h3>
-        <p>Search from main page to see details here.</p>
-      </div>
+
+        <!-- Loading -->
+
+        <div
+            class="aside-loading"
+            id="loadingState"
+        >
+
+            <div class="spinner"></div>
+
+            <span>
+                Loading...
+            </span>
+
+        </div>
+
+
+
+        <!-- Person Details -->
+
+        <div
+            class="person-detail hidden"
+            id="personDetail"
+        >
+
+            <div
+                class="name-title"
+                id="personName"
+            >
+            </div>
+
+
+            <div class="detail-list">
+
+
+                <div class="detail-row">
+
+                    <span class="label">
+                        Birth
+                    </span>
+
+                    <span
+                        class="value"
+                        id="personBirth"
+                    >
+                        —
+                    </span>
+
+                </div>
+
+
+
+                <div class="detail-row">
+
+                    <span class="label">
+                        Death
+                    </span>
+
+                    <span
+                        class="value"
+                        id="personDeath"
+                    >
+                        —
+                    </span>
+
+                </div>
+
+
+
+                <div class="detail-row">
+
+                    <span class="label">
+                        Section
+                    </span>
+
+                    <span
+                        class="value"
+                        id="personSection"
+                    >
+                        —
+                    </span>
+
+                </div>
+
+
+
+                <div class="detail-row">
+
+                    <span class="label">
+                        Row
+                    </span>
+
+                    <span
+                        class="value"
+                        id="personRow"
+                    >
+                        —
+                    </span>
+
+                </div>
+
+
+
+                <div class="detail-row">
+
+                    <span class="label">
+                        Column
+                    </span>
+
+                    <span
+                        class="value"
+                        id="personColumn"
+                    >
+                        —
+                    </span>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =========================================
+                 NAVIGATION SECTION
+            ========================================== -->
+
+            <div
+                class="nav-section hidden"
+                id="navSection"
+            >
+
+                <div class="nav-divider"></div>
+
+
+                <div class="nav-info">
+
+                    <span
+                        class="nav-distance"
+                        id="distInfo"
+                    >
+                        —
+                    </span>
+
+
+                    <span
+                        class="nav-label"
+                        id="navStatus"
+                    >
+                        Navigation off
+                    </span>
+
+                </div>
+
+
+
+                <button
+                    class="nav-btn hidden"
+                    id="navToggleBtn"
+                >
+
+                    <span class="nav-icon">
+                        🧭
+                    </span>
+
+                    <span>
+                        Show Direction
+                    </span>
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- Empty State -->
+
+        <div
+            class="aside-empty"
+            id="emptyState"
+        >
+
+            <div class="icon">
+                📭
+            </div>
+
+            <h3>
+                No Person Selected
+            </h3>
+
+            <p>
+                Search from main page to see details here.
+            </p>
+
+        </div>
+
     </aside>
 
-    <!-- 3D Viewer -->
-    <main class="viewer" id="viewerContainer">
-      <div class="viewer-hint">🖱 Drag to rotate · Scroll to zoom</div>
+
+
+    <!-- =================================================
+         3D VIEWER
+    ================================================== -->
+
+    <main
+        class="viewer"
+        id="viewerContainer"
+    >
+
+        <div class="viewer-hint">
+            🖱 Drag to rotate · Scroll to zoom
+        </div>
+
     </main>
 
-  </div>
 
-  <!-- ===== THREE.JS ===== -->
-  <script type="importmap">
-  {
+</div>
+
+
+
+<!-- =====================================================
+     THREE.JS IMPORT MAP
+===================================================== -->
+
+<script type="importmap">
+
+{
     "imports": {
-      "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
-      "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+
+        "three":
+        "https://unpkg.com/three@0.160.0/build/three.module.js",
+
+        "three/addons/":
+        "https://unpkg.com/three@0.160.0/examples/jsm/"
+
     }
-  }
-  </script>
+}
+
+</script>
+
+
+
+<!-- =====================================================
+     THREE.JS SCRIPT
+===================================================== -->
 
 <script type="module">
-  // ============================================
-  // 3D MAP JAVASCRIPT (Three.js)
-  // This builds the 3D cemetery map and shows
-  // the direction from the entrance to a grave.
-  // ============================================
 
-  // --- Find the parts of the page we need to change ---
-  const loadingEl = document.getElementById('loadingState');   // the "Loading..." box
-  const personDetail = document.getElementById('personDetail'); // the box with person info
-  const emptyState = document.getElementById('emptyState');     // the "No Person Selected" box
-  const navBtn = document.getElementById('navToggleBtn');       // the "Show Direction" button
-  const navStatus = document.getElementById('navStatus');       // the "Navigation on/off" text
-  const distInfo = document.getElementById('distInfo');         // the distance text
 
-  // The entrance of the cemetery (its 3D position).
-  const ENTRANCE = { x: -44.3522, y: 15.3224, z: 5.941 };
+/* =====================================================
+   IMPORT THREE.JS
+===================================================== */
 
-  // --- Things we remember as the map is used ---
-  let navVisible = false;      // is the direction currently shown?
-  let destinationPos = null;   // the grave we are going to
-  let navLine = null;          // the dashed line from entrance to grave
-  let entranceMarker = null;   // the green marker at the entrance
-  let destMarker = null;       // the red marker at the grave
-  let navArrows = [];          // the orange arrows along the path
+import * as THREE from
+    'three';
 
-// ---------- SHOW THE LOADING BOX ----------
-  function showLoading() {
-    loadingEl.style.display = 'flex';        // show loading
-    personDetail.style.display = 'none';     // hide person info
-    emptyState.style.display = 'none';       // hide empty message
-  }
 
-  // ---------- SHOW THE PERSON'S INFO ----------
-  function showPerson(data) {
-    loadingEl.style.display = 'none';        // hide loading
-    emptyState.style.display = 'none';       // hide empty message
-    personDetail.style.display = 'block';    // show person info
+import {
+    OrbitControls
+}
+from
+    'three/addons/controls/OrbitControls.js';
 
-    // Fill each label with the person's data.
-    document.getElementById('personName').textContent = data.Fullname || '—';
-    document.getElementById('personBirth').textContent = data.Birthdate || '—';
-    document.getElementById('personDeath').textContent = data.Deathdate || '—';
-    document.getElementById('personSection').textContent = data.Phase || '—';
-    document.getElementById('personRow').textContent = data.Row || '—';
-    document.getElementById('personColumn').textContent = data.Column || '—';
-  }
 
-  // ---------- SHOW THE EMPTY MESSAGE ----------
-  function showEmpty() {
-    loadingEl.style.display = 'none';        // hide loading
-    personDetail.style.display = 'none';     // hide person info
-    emptyState.style.display = 'flex';       // show empty message
-  }
+import {
+    GLTFLoader
+}
+from
+    'three/addons/loaders/GLTFLoader.js';
 
-// ---------- READ THE WEB ADDRESS ----------
-  // The main page sends us the chosen person's name and coordinates
-  // in the web address (after the ?). We read them here.
-  const params = new URLSearchParams(window.location.search);
-  const nameParam = params.get('name');   // the person's name
-  const destX = parseFloat(params.get('x')); // the X coordinate
-  const destY = parseFloat(params.get('y')); // the Y coordinate
-  const destZ = parseFloat(params.get('z')); // the Z coordinate
 
-  // If a name was given, look up that person's details.
-  if (nameParam && nameParam.trim() !== '') {
-    showLoading();   // show the loading box while we wait
-    fetch('search.php?name=' + encodeURIComponent(nameParam.trim()))
-      .then(res => res.json())
-      .then(people => {
-        if (people && people.length > 0) {
-          showPerson(people[0]);   // show the first matching person
-        } else {
-          showEmpty();   // no person found
-        }
-      })
-      .catch(err => {
-        console.error(err);
+
+/* =====================================================
+   SUPABASE CONFIGURATION
+===================================================== */
+
+const SUPABASE_URL =
+    'https://urfmjczbaoavwmhrirmt.supabase.co';
+
+
+const SUPABASE_PUBLISHABLE_KEY =
+    'sb_publishable_JXMzmYxKQhuD2uh-mmPbrQ_Mo4zgLgV';
+
+
+
+/* =====================================================
+   SUPABASE TABLE
+===================================================== */
+
+const SUPABASE_TABLE =
+    'cemetery_tb';
+
+
+
+/* =====================================================
+   SUPABASE STORAGE GLB
+===================================================== */
+
+const MODEL_URL =
+    'https://urfmjczbaoavwmhrirmt.supabase.co/storage/v1/object/public/cemetery-map/STRUCTURE.glb';
+
+
+
+/* =====================================================
+   HTML ELEMENTS
+===================================================== */
+
+const viewerContainer =
+    document.getElementById(
+        'viewerContainer'
+    );
+
+
+const loadingState =
+    document.getElementById(
+        'loadingState'
+    );
+
+
+const personDetail =
+    document.getElementById(
+        'personDetail'
+    );
+
+
+const emptyState =
+    document.getElementById(
+        'emptyState'
+    );
+
+
+const navSection =
+    document.getElementById(
+        'navSection'
+    );
+
+
+const navToggleBtn =
+    document.getElementById(
+        'navToggleBtn'
+    );
+
+
+const navStatus =
+    document.getElementById(
+        'navStatus'
+    );
+
+
+const distInfo =
+    document.getElementById(
+        'distInfo'
+    );
+
+
+
+/* =====================================================
+   URL PARAMETERS
+===================================================== */
+
+const urlParams =
+    new URLSearchParams(
+        window.location.search
+    );
+
+
+const nameParam =
+    urlParams.get(
+        'name'
+    );
+
+
+const destX =
+    parseFloat(
+        urlParams.get(
+            'x'
+        )
+    );
+
+
+const destY =
+    parseFloat(
+        urlParams.get(
+            'y'
+        )
+    );
+
+
+const destZ =
+    parseFloat(
+        urlParams.get(
+            'z'
+        )
+    );
+
+
+
+/* =====================================================
+   ENTRANCE COORDINATES
+===================================================== */
+
+const ENTRANCE = {
+
+    x: -44.3522,
+
+    y: 15.3224,
+
+    z: 5.941
+
+};
+
+
+
+/* =====================================================
+   NAVIGATION VARIABLES
+===================================================== */
+
+let destinationPos =
+    null;
+
+
+let navVisible =
+    false;
+
+
+let navLine =
+    null;
+
+
+let entranceMarker =
+    null;
+
+
+let destinationMarker =
+    null;
+
+
+let navigationArrows =
+    [];
+
+
+let destinationPulse =
+    null;
+
+
+
+/* =====================================================
+   CHECK DESTINATION
+===================================================== */
+
+if (
+    !isNaN(destX) &&
+    !isNaN(destY) &&
+    !isNaN(destZ)
+) {
+
+    destinationPos =
+        new THREE.Vector3(
+            destX,
+            destY,
+            destZ
+        );
+
+
+    navSection.classList.remove(
+        'hidden'
+    );
+
+
+    navSection.style.display =
+        'block';
+
+
+    navToggleBtn.classList.remove(
+        'hidden'
+    );
+
+
+    navToggleBtn.style.display =
+        'flex';
+
+
+    const distance =
+        new THREE.Vector3(
+            ENTRANCE.x,
+            ENTRANCE.y,
+            ENTRANCE.z
+        )
+        .distanceTo(
+            destinationPos
+        );
+
+
+    distInfo.textContent =
+        distance.toFixed(1) +
+        'm from entrance';
+
+}
+
+
+
+/* =====================================================
+   SHOW LOADING
+===================================================== */
+
+function showLoading() {
+
+    loadingState.style.display =
+        'flex';
+
+
+    personDetail.style.display =
+        'none';
+
+
+    emptyState.style.display =
+        'none';
+
+}
+
+
+
+/* =====================================================
+   SHOW PERSON
+===================================================== */
+
+function showPerson(data) {
+
+    loadingState.style.display =
+        'none';
+
+
+    emptyState.style.display =
+        'none';
+
+
+    personDetail.style.display =
+        'block';
+
+
+    document.getElementById(
+        'personName'
+    ).textContent =
+        data.Fullname || '—';
+
+
+    document.getElementById(
+        'personBirth'
+    ).textContent =
+        data.Birthdate || '—';
+
+
+    document.getElementById(
+        'personDeath'
+    ).textContent =
+        data.Deathdate || '—';
+
+
+    document.getElementById(
+        'personSection'
+    ).textContent =
+        data.Phase || '—';
+
+
+    document.getElementById(
+        'personRow'
+    ).textContent =
+        data.Row || '—';
+
+
+    document.getElementById(
+        'personColumn'
+    ).textContent =
+        data.Column || '—';
+
+}
+
+
+
+/* =====================================================
+   SHOW EMPTY
+===================================================== */
+
+function showEmpty() {
+
+    loadingState.style.display =
+        'none';
+
+
+    personDetail.style.display =
+        'none';
+
+
+    emptyState.style.display =
+        'flex';
+
+}
+
+
+
+/* =====================================================
+   LOAD PERSON FROM SUPABASE
+===================================================== */
+
+async function loadPerson() {
+
+
+    if (
+        !nameParam ||
+        nameParam.trim() === ''
+    ) {
+
         showEmpty();
-      });
-  } else {
-    showEmpty();   // no name given
-  }
 
-  // If we have valid coordinates, remember the destination grave.
-  if (!isNaN(destX) && !isNaN(destY) && !isNaN(destZ)) {
-destinationPos = new THREE.Vector3(destX, destY, destZ);
-    // Show the navigation section and the "Show Direction" button.
-    document.getElementById('navSection').style.display = 'block';
-    navBtn.style.display = 'flex';
+        return;
 
-    // Calculate how far the grave is from the entrance.
-    const dx = destX - ENTRANCE.x;
-    const dy = destY - ENTRANCE.y;
-    const dz = destZ - ENTRANCE.z;
-    const dist = Math.sqrt(dx*dx + dy*dy + dz*dz);
-    distInfo.textContent = dist.toFixed(1) + 'm from entrance';
-  }
+    }
 
-  // ---------- SET UP THE 3D WORLD ----------
-  // Three.js is a library for making 3D graphics in the browser.
-  // We import the parts we need: the core, the mouse controls,
-  // and the loader that reads our 3D model file (.glb).
-  import * as THREE from 'three';
-  import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-  import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
-  // The box on the page where the 3D map will be drawn.
-  const container = document.getElementById('viewerContainer');
+    showLoading();
 
-  // The "scene" is the world where all 3D objects live.
-  const scene = new THREE.Scene();
-  scene.background = new THREE.Color(0xbfd8ff);   // light blue sky
 
-  // The "camera" is our eye looking into the scene.
-  const camera = new THREE.PerspectiveCamera(60, container.clientWidth / container.clientHeight, 0.1, 1000);
-  camera.position.set(5, 5, 5);   // start camera position
+    try {
 
-  // The "renderer" draws the scene onto the page.
-  const renderer = new THREE.WebGLRenderer({ antialias: true });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  renderer.setSize(container.clientWidth, container.clientHeight);
-  container.prepend(renderer.domElement);
 
-  // Mouse controls: lets the user drag to rotate and scroll to zoom.
-  const controls = new OrbitControls(camera, renderer.domElement);
-  controls.enableDamping = true;       // smooth movement
-  controls.dampingFactor = 0.08;
+        const searchName =
+            nameParam.trim();
 
-  // Add lights so the objects are not dark.
-  scene.add(new THREE.AmbientLight(0xffffff, 2));   // soft light everywhere
-  const light = new THREE.DirectionalLight(0xffffff, 2);   // light from one direction
-  light.position.set(10, 20, 10);
-  scene.add(light);
 
-  // Add a grid on the floor so we can see the ground.
-  scene.add(new THREE.GridHelper(50, 20));
+        const endpoint =
+            SUPABASE_URL +
+            '/rest/v1/' +
+            SUPABASE_TABLE +
+            '?Fullname=ilike.*' +
+            encodeURIComponent(
+                searchName
+            ) +
+            '*&select=*&limit=1';
 
-  // Load the 3D model of the cemetery.
-  const loader = new GLTFLoader();
-  loader.load('STRUCTURE.glb', (gltf) => {
-    const model = gltf.scene;   // the loaded 3D model
-    scene.add(model);
 
-    // Move the camera so it fits the whole model on screen.
-    const box = new THREE.Box3().setFromObject(model);
-    const size = box.getSize(new THREE.Vector3());
-    const max = Math.max(size.x, size.y, size.z);
-    camera.position.set(max, max * 0.7, max);
-    controls.target.set(0, 0, 0);
-    controls.update();
-  }, undefined, (err) => {
-    console.error(err);
-    alert('Failed to load STRUCTURE.glb');
-  });
+        console.log(
+            'Searching Supabase:',
+            searchName
+        );
 
-  // Keep the map looking right when the window is resized.
-  function onResize() {
-    const w = container.clientWidth;
-    const h = container.clientHeight;
-    camera.aspect = w / h;
-    camera.updateProjectionMatrix();
-    renderer.setSize(w, h);
-  }
-  window.addEventListener('resize', onResize);
 
-  // ---------- CREATE THE ENTRANCE MARKER (green) ----------
-  function createEntranceMarker() {
-    // A green ball at the entrance.
-    const geo = new THREE.SphereGeometry(0.6, 16, 16);
-    const mat = new THREE.MeshStandardMaterial({
-      color: 0x22c55e,
-      emissive: 0x22c55e,
-      emissiveIntensity: 0.3,
+        const response =
+            await fetch(
+                endpoint,
+                {
+
+                    method: 'GET',
+
+                    headers: {
+
+                        'apikey':
+                            SUPABASE_PUBLISHABLE_KEY
+
+                    }
+
+                }
+            );
+
+
+        if (
+            !response.ok
+        ) {
+
+            const errorText =
+                await response.text();
+
+
+            throw new Error(
+                'Supabase error ' +
+                response.status +
+                ': ' +
+                errorText
+            );
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        console.log(
+            'Supabase result:',
+            data
+        );
+
+
+        if (
+            data.length > 0
+        ) {
+
+            showPerson(
+                data[0]
+            );
+
+        } else {
+
+            showEmpty();
+
+        }
+
+
+    } catch (
+        error
+    ) {
+
+        console.error(
+            'Failed to load person:',
+            error
+        );
+
+
+        showEmpty();
+
+    }
+
+}
+
+
+
+/* =====================================================
+   THREE.JS SCENE
+===================================================== */
+
+const scene =
+    new THREE.Scene();
+
+
+scene.background =
+    new THREE.Color(
+        0xbfd8ff
+    );
+
+
+
+/* =====================================================
+   CAMERA
+===================================================== */
+
+const camera =
+    new THREE.PerspectiveCamera(
+
+        60,
+
+        viewerContainer.clientWidth /
+        viewerContainer.clientHeight,
+
+        0.1,
+
+        10000
+
+    );
+
+
+camera.position.set(
+    20,
+    20,
+    30
+);
+
+
+
+/* =====================================================
+   RENDERER
+===================================================== */
+
+const renderer =
+    new THREE.WebGLRenderer({
+
+        antialias:
+            true,
+
+        powerPreference:
+            'high-performance'
+
     });
-    const mesh = new THREE.Mesh(geo, mat);
-mesh.position.set(ENTRANCE.x, ENTRANCE.y, ENTRANCE.z);
-    scene.add(mesh);
 
-    // A green ring under the ball.
-    const ringGeo = new THREE.RingGeometry(0.7, 0.9, 32);
-    const ringMat = new THREE.MeshBasicMaterial({
-      color: 0x22c55e,
-      side: THREE.DoubleSide,
-      transparent: true,
-      opacity: 0.5,
-    });
-    const ring = new THREE.Mesh(ringGeo, ringMat);
-    ring.position.set(ENTRANCE.x, ENTRANCE.y + 0.05, ENTRANCE.z);
-    ring.rotation.x = -Math.PI / 2;   // lay the ring flat
-    scene.add(ring);
 
-    return { mesh, ring };
-  }
+renderer.setPixelRatio(
+    Math.min(
+        window.devicePixelRatio,
+        2
+    )
+);
 
-  // ---------- CREATE THE DESTINATION MARKER (red) ----------
-  function createDestMarker(pos) {
-    // A red ball at the grave.
-    const geo = new THREE.SphereGeometry(0.5, 16, 16);
-    const mat = new THREE.MeshStandardMaterial({
-      color: 0xef4444,
-      emissive: 0xef4444,
-      emissiveIntensity: 0.4,
-    });
-    const mesh = new THREE.Mesh(geo, mat);
-mesh.position.copy(pos);
-    scene.add(mesh);
 
-    // A red ring under the ball.
-    const ringGeo = new THREE.RingGeometry(0.6, 0.8, 32);
-    const ringMat = new THREE.MeshBasicMaterial({
-      color: 0xef4444,
-      side: THREE.DoubleSide,
-      transparent: true,
-      opacity: 0.6,
-    });
-    const ring = new THREE.Mesh(ringGeo, ringMat);
-    ring.position.set(pos.x, pos.y + 0.05, pos.z);
-ring.rotation.x = -Math.PI / 2;
-    scene.add(ring);
+renderer.setSize(
 
-    // A soft red glow around the grave.
-    const canvas = document.createElement('canvas');
-    canvas.width = 64;
-    canvas.height = 64;
-    const ctx = canvas.getContext('2d');
-    const gradient = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
-    gradient.addColorStop(0, 'rgba(239,68,68,0.8)');
-    gradient.addColorStop(0.5, 'rgba(239,68,68,0.3)');
-    gradient.addColorStop(1, 'rgba(239,68,68,0)');
-    ctx.fillStyle = gradient;
-    ctx.fillRect(0, 0, 64, 64);
-    const texture = new THREE.CanvasTexture(canvas);
-    const spriteMat = new THREE.SpriteMaterial({ map: texture, transparent: true, depthWrite: false });
-    const sprite = new THREE.Sprite(spriteMat);
-    sprite.scale.set(3, 3, 1);
-    sprite.position.set(pos.x, pos.y + 0.5, pos.z);
-    scene.add(sprite);
+    viewerContainer.clientWidth,
 
-    return { mesh, ring, sprite };
-  }
+    viewerContainer.clientHeight
 
-  // ---------- CREATE THE DIRECTION LINE (orange, dashed) ----------
-  function createNavLine(from, to) {
-    const fromVec = new THREE.Vector3(from.x, from.y, from.z);
-    const toVec = new THREE.Vector3(to.x, to.y, to.z);
-const points = [fromVec, toVec];
+);
 
-    // The main dashed line.
-    const lineGeo = new THREE.BufferGeometry().setFromPoints(points);
-    const lineMat = new THREE.LineDashedMaterial({
-      color: 0xf59e0b,
-      dashSize: 0.5,
-      gapSize: 0.3,
-      scale: 1,
-    });
-    const dashedLine = new THREE.Line(lineGeo, lineMat);
-dashedLine.computeLineDistances();
-    scene.add(dashedLine);
 
-    // A soft glow line under the dashed line.
-    const glowMat = new THREE.LineBasicMaterial({
-      color: 0xfbbf24,
-      transparent: true,
-      opacity: 0.15,
-    });
-    const glowLine = new THREE.Line(lineGeo.clone(), glowMat);
-    glowLine.position.y -= 0.02;
-    scene.add(glowLine);
+renderer.outputColorSpace =
+    THREE.SRGBColorSpace;
 
-    return { dashedLine, glowLine };
-  }
 
-  // ---------- CREATE THE DIRECTION ARROWS (orange cones) ----------
-  function createDirectionArrows(from, to) {
+renderer.shadowMap.enabled =
+    true;
+
+
+viewerContainer.appendChild(
+    renderer.domElement
+);
+
+
+
+/* =====================================================
+   ORBIT CONTROLS
+===================================================== */
+
+const controls =
+    new OrbitControls(
+
+        camera,
+
+        renderer.domElement
+
+    );
+
+
+controls.enableDamping =
+    true;
+
+
+controls.dampingFactor =
+    0.07;
+
+
+controls.enableZoom =
+    true;
+
+
+controls.enablePan =
+    true;
+
+
+controls.enableRotate =
+    true;
+
+
+controls.screenSpacePanning =
+    true;
+
+
+controls.minDistance =
+    1;
+
+
+controls.maxDistance =
+    5000;
+
+
+
+/* =====================================================
+   LIGHTING
+===================================================== */
+
+const hemisphereLight =
+    new THREE.HemisphereLight(
+
+        0xffffff,
+
+        0x6b7280,
+
+        2.5
+
+    );
+
+
+scene.add(
+    hemisphereLight
+);
+
+
+
+const directionalLight =
+    new THREE.DirectionalLight(
+
+        0xffffff,
+
+        3
+
+    );
+
+
+directionalLight.position.set(
+    50,
+    100,
+    50
+);
+
+
+directionalLight.castShadow =
+    true;
+
+
+scene.add(
+    directionalLight
+);
+
+
+
+const fillLight =
+    new THREE.DirectionalLight(
+
+        0xffffff,
+
+        1
+
+    );
+
+
+fillLight.position.set(
+    -50,
+    30,
+    -50
+);
+
+
+scene.add(
+    fillLight
+);
+
+
+
+/* =====================================================
+   GLB LOADER
+===================================================== */
+
+const loader =
+    new GLTFLoader();
+
+
+console.log(
+    'Loading 3D cemetery from Supabase...'
+);
+
+
+console.log(
+    MODEL_URL
+);
+
+
+
+loader.load(
+
+    MODEL_URL,
+
+
+    /* ================================================
+       SUCCESS
+    ================================================= */
+
+    function (
+        gltf
+    ) {
+
+
+        console.log(
+            'STRUCTURE.glb successfully loaded!',
+            gltf
+        );
+
+
+        const model =
+            gltf.scene;
+
+
+        scene.add(
+            model
+        );
+
+
+        /*
+           Calculate model bounds.
+        */
+
+        const box =
+            new THREE.Box3()
+            .setFromObject(
+                model
+            );
+
+
+        const center =
+            box.getCenter(
+                new THREE.Vector3()
+            );
+
+
+        const size =
+            box.getSize(
+                new THREE.Vector3()
+            );
+
+
+        console.log(
+            'Model center:',
+            center
+        );
+
+
+        console.log(
+            'Model size:',
+            size
+        );
+
+
+        /*
+           Center model.
+        */
+
+        model.position.x -=
+            center.x;
+
+
+        model.position.y -=
+            center.y;
+
+
+        model.position.z -=
+            center.z;
+
+
+        /*
+           Calculate camera distance.
+        */
+
+        const maxDimension =
+            Math.max(
+                size.x,
+                size.y,
+                size.z
+            );
+
+
+        const cameraDistance =
+            Math.max(
+                maxDimension * 1.3,
+                10
+            );
+
+
+        camera.position.set(
+
+            cameraDistance,
+
+            cameraDistance * 0.75,
+
+            cameraDistance
+
+        );
+
+
+        controls.target.set(
+            0,
+            0,
+            0
+        );
+
+
+        controls.update();
+
+
+        /*
+           Enable shadows.
+        */
+
+        model.traverse(
+            function (
+                object
+            ) {
+
+                if (
+                    object.isMesh
+                ) {
+
+                    object.castShadow =
+                        true;
+
+
+                    object.receiveShadow =
+                        true;
+
+                }
+
+            }
+        );
+
+
+        /*
+           Create navigation
+           automatically if coordinates
+           were supplied.
+        */
+
+        if (
+            destinationPos
+        ) {
+
+            setTimeout(
+                function () {
+
+                    toggleNavigation();
+
+                },
+                800
+            );
+
+        }
+
+
+        console.log(
+            '3D cemetery map ready!'
+        );
+
+    },
+
+
+    /* ================================================
+       LOADING
+    ================================================= */
+
+    function (
+        progress
+    ) {
+
+        if (
+            progress.total
+        ) {
+
+            const percent =
+                (
+                    progress.loaded /
+                    progress.total
+                ) * 100;
+
+
+            console.log(
+                '3D map loading: ' +
+                percent.toFixed(1) +
+                '%'
+            );
+
+        } else {
+
+            console.log(
+                '3D map loading...',
+                progress.loaded,
+                'bytes'
+            );
+
+        }
+
+    },
+
+
+    /* ================================================
+       ERROR
+    ================================================= */
+
+    function (
+        error
+    ) {
+
+        console.error(
+            'STRUCTURE.glb loading error:',
+            error
+        );
+
+
+        alert(
+            'The 3D cemetery map could not be loaded. ' +
+            'Please check your Supabase Storage bucket and browser console.'
+        );
+
+    }
+
+);
+
+
+
+/* =====================================================
+   ENTRANCE MARKER
+===================================================== */
+
+function createEntranceMarker() {
+
+
+    const geometry =
+        new THREE.SphereGeometry(
+            0.6,
+            20,
+            20
+        );
+
+
+    const material =
+        new THREE.MeshStandardMaterial({
+
+            color:
+                0x22c55e,
+
+            emissive:
+                0x22c55e,
+
+            emissiveIntensity:
+                0.4
+
+        });
+
+
+    const marker =
+        new THREE.Mesh(
+            geometry,
+            material
+        );
+
+
+    marker.position.set(
+
+        ENTRANCE.x,
+        ENTRANCE.y,
+        ENTRANCE.z
+
+    );
+
+
+    scene.add(
+        marker
+    );
+
+
+    return marker;
+
+}
+
+
+
+/* =====================================================
+   DESTINATION MARKER
+===================================================== */
+
+function createDestinationMarker(
+    position
+) {
+
+
+    const geometry =
+        new THREE.SphereGeometry(
+            0.6,
+            20,
+            20
+        );
+
+
+    const material =
+        new THREE.MeshStandardMaterial({
+
+            color:
+                0xef4444,
+
+            emissive:
+                0xef4444,
+
+            emissiveIntensity:
+                0.5
+
+        });
+
+
+    const marker =
+        new THREE.Mesh(
+            geometry,
+            material
+        );
+
+
+    marker.position.copy(
+        position
+    );
+
+
+    scene.add(
+        marker
+    );
+
+
+    return marker;
+
+}
+
+
+
+/* =====================================================
+   NAVIGATION LINE
+===================================================== */
+
+function createNavigationLine(
+    from,
+    to
+) {
+
+
+    const points = [
+
+        from.clone(),
+
+        to.clone()
+
+    ];
+
+
+    const geometry =
+        new THREE.BufferGeometry()
+        .setFromPoints(
+            points
+        );
+
+
+    const material =
+        new THREE.LineDashedMaterial({
+
+            color:
+                0xf59e0b,
+
+            dashSize:
+                0.7,
+
+            gapSize:
+                0.4,
+
+            linewidth:
+                2
+
+        });
+
+
+    const line =
+        new THREE.Line(
+            geometry,
+            material
+        );
+
+
+    line.computeLineDistances();
+
+
+    scene.add(
+        line
+    );
+
+
+    return line;
+
+}
+
+
+
+/* =====================================================
+   DIRECTION ARROWS
+===================================================== */
+
+function createDirectionArrows(
+    from,
+    to
+) {
+
+
     const arrows = [];
-    // Figure out the direction (from entrance to grave).
-    const dir = new THREE.Vector3().subVectors(to, from);
-    const length = dir.length();
-dir.normalize();
 
-    // Place a few arrows along the path (at least 3).
-    const count = Math.max(3, Math.floor(length / 3));
-    for (let i = 1; i <= count; i++) {
-      const t = i / (count + 1);
-      const pos = new THREE.Vector3().lerpVectors(from, to, t);   // spot on the path
 
-      // Make an orange cone (arrow shape).
-      const coneGeo = new THREE.ConeGeometry(0.3, 0.6, 8);
-      const coneMat = new THREE.MeshStandardMaterial({
-        color: 0xf59e0b,
-        emissive: 0xf59e0b,
-        emissiveIntensity: 0.2,
-      });
-      const cone = new THREE.Mesh(coneGeo, coneMat);
-cone.position.copy(pos);
+    const direction =
+        new THREE.Vector3()
+        .subVectors(
+            to,
+            from
+        );
 
-      // Point the cone in the direction of travel.
-      const up = new THREE.Vector3(0, 1, 0);
-      const quat = new THREE.Quaternion().setFromUnitVectors(up, dir);
-      cone.setRotationFromQuaternion(quat);
 
-      scene.add(cone);
-      arrows.push(cone);
+    const length =
+        direction.length();
+
+
+    direction.normalize();
+
+
+    const count =
+        Math.max(
+            3,
+            Math.floor(
+                length / 3
+            )
+        );
+
+
+    for (
+        let i = 1;
+        i <= count;
+        i++
+    ) {
+
+
+        const t =
+            i /
+            (count + 1);
+
+
+        const position =
+            new THREE.Vector3()
+            .lerpVectors(
+                from,
+                to,
+                t
+            );
+
+
+        const geometry =
+            new THREE.ConeGeometry(
+                0.3,
+                0.7,
+                8
+            );
+
+
+        const material =
+            new THREE.MeshStandardMaterial({
+
+                color:
+                    0xf59e0b,
+
+                emissive:
+                    0xf59e0b,
+
+                emissiveIntensity:
+                    0.3
+
+            });
+
+
+        const arrow =
+            new THREE.Mesh(
+                geometry,
+                material
+            );
+
+
+        arrow.position.copy(
+            position
+        );
+
+
+        const up =
+            new THREE.Vector3(
+                0,
+                1,
+                0
+            );
+
+
+        const quaternion =
+            new THREE.Quaternion();
+
+
+        quaternion.setFromUnitVectors(
+            up,
+            direction
+        );
+
+
+        arrow.setRotationFromQuaternion(
+            quaternion
+        );
+
+
+        scene.add(
+            arrow
+        );
+
+
+        arrows.push(
+            arrow
+        );
+
     }
+
+
     return arrows;
-  }
 
-  // ---------- REMOVE THE NAVIGATION ----------
-  // Deletes all markers, lines, and arrows from the scene.
-  function removeNavigation() {
-    if (entranceMarker) {
-      scene.remove(entranceMarker.mesh);
-      scene.remove(entranceMarker.ring);
-      entranceMarker = null;
-    }
-    if (destMarker) {
-      scene.remove(destMarker.mesh);
-      scene.remove(destMarker.ring);
-      scene.remove(destMarker.sprite);
-      if (destMarker.pulseInterval) clearInterval(destMarker.pulseInterval);
-      destMarker = null;
-    }
-    if (navLine) {
-      scene.remove(navLine.dashedLine);
-      scene.remove(navLine.glowLine);
-      navLine = null;
-    }
-    navArrows.forEach(a => scene.remove(a));
-    navArrows = [];
-    navVisible = false;
-  }
+}
 
-  // ---------- CREATE THE NAVIGATION ----------
-  // Builds the entrance marker, destination marker, line, and arrows.
-  function createNavigation() {
-    if (!destinationPos) return;   // no destination to go to
-    removeNavigation();            // clear any old navigation first
 
-    entranceMarker = createEntranceMarker();
-    destMarker = createDestMarker(destinationPos);
-    navLine = createNavLine(
-      new THREE.Vector3(ENTRANCE.x, ENTRANCE.y, ENTRANCE.z),
-      destinationPos
+
+/* =====================================================
+   REMOVE NAVIGATION
+===================================================== */
+
+function removeNavigation() {
+
+
+    if (
+        entranceMarker
+    ) {
+
+        scene.remove(
+            entranceMarker
+        );
+
+        entranceMarker =
+            null;
+
+    }
+
+
+    if (
+        destinationMarker
+    ) {
+
+        scene.remove(
+            destinationMarker
+        );
+
+        destinationMarker =
+            null;
+
+    }
+
+
+    if (
+        navLine
+    ) {
+
+        scene.remove(
+            navLine
+        );
+
+        navLine =
+            null;
+
+    }
+
+
+    navigationArrows.forEach(
+        function (
+            arrow
+        ) {
+
+            scene.remove(
+                arrow
+            );
+
+        }
     );
-    navArrows = createDirectionArrows(
-      new THREE.Vector3(ENTRANCE.x, ENTRANCE.y, ENTRANCE.z),
-      destinationPos
-    );
-navVisible = true;
 
-    // Make the red destination ring "pulse" (grow and shrink).
-    let pulseDir = 1;
-    if (destMarker) {
-      destMarker.pulseInterval = setInterval(() => {
-        if (!destMarker || !navVisible) return;
-        const ring = destMarker.ring;
-        const scale = ring.scale.x + 0.02 * pulseDir;
-        if (scale > 1.8) pulseDir = -1;
-        if (scale < 0.8) pulseDir = 1;
-        ring.scale.set(scale, scale, scale);
-        ring.material.opacity = 0.6 - (scale - 0.8) * 0.5;
-      }, 50);
+
+    navigationArrows = [];
+
+
+    navVisible =
+        false;
+
+}
+
+
+
+/* =====================================================
+   CREATE NAVIGATION
+===================================================== */
+
+function createNavigation() {
+
+
+    if (
+        !destinationPos
+    ) {
+
+        return;
+
     }
-  }
 
-  // ---------- SHOW / HIDE THE DIRECTION ----------
-  // This runs when the user clicks the "Show/Hide Direction" button.
-  window.toggleNavigation = function() {
-    if (navVisible) {
-      // Turn it off.
-      removeNavigation();
-      navBtn.classList.remove('active');
-      navBtn.innerHTML = '<span class="nav-icon">🧭</span><span>Show Direction</span>';
-      navStatus.textContent = 'Navigation off';
+
+    entranceMarker =
+        createEntranceMarker();
+
+
+    destinationMarker =
+        createDestinationMarker(
+            destinationPos
+        );
+
+
+    const entrancePosition =
+        new THREE.Vector3(
+
+            ENTRANCE.x,
+
+            ENTRANCE.y,
+
+            ENTRANCE.z
+
+        );
+
+
+    navLine =
+        createNavigationLine(
+
+            entrancePosition,
+
+            destinationPos
+
+        );
+
+
+    navigationArrows =
+        createDirectionArrows(
+
+            entrancePosition,
+
+            destinationPos
+
+        );
+
+
+    navVisible =
+        true;
+
+}
+
+
+
+/* =====================================================
+   TOGGLE NAVIGATION
+===================================================== */
+
+function toggleNavigation() {
+
+
+    if (
+        navVisible
+    ) {
+
+
+        removeNavigation();
+
+
+        navToggleBtn.innerHTML =
+            '<span class="nav-icon">🧭</span>' +
+            '<span>Show Direction</span>';
+
+
+        navToggleBtn.classList.remove(
+            'active'
+        );
+
+
+        navStatus.textContent =
+            'Navigation off';
+
+
     } else {
-      // Turn it on.
-      createNavigation();
-      navBtn.classList.add('active');
-      navBtn.innerHTML = '<span class="nav-icon">🧭</span><span>Hide Direction</span>';
-      navStatus.textContent = 'Navigation on';
+
+
+        createNavigation();
+
+
+        navToggleBtn.innerHTML =
+            '<span class="nav-icon">🧭</span>' +
+            '<span>Hide Direction</span>';
+
+
+        navToggleBtn.classList.add(
+            'active'
+        );
+
+
+        navStatus.textContent =
+            'Navigation on';
+
     }
-  };
 
-  // If we have a destination, show the direction automatically
-  // a short time after the page loads.
-if (destinationPos) {
-    setTimeout(() => {
-      window.toggleNavigation();
-    }, 1200);
-  }
+}
 
-  // ---------- ANIMATION LOOP ----------
-  // This keeps redrawing the scene over and over,
-  // which makes the 3D map alive and interactive.
-  function animate() {
-    requestAnimationFrame(animate);   // ask to run again next frame
-    controls.update();                // update mouse controls
-    renderer.render(scene, camera);   // draw the scene
-  }
-  animate();
-  </script>
+
+
+/* =====================================================
+   NAVIGATION BUTTON
+===================================================== */
+
+navToggleBtn.addEventListener(
+    'click',
+    toggleNavigation
+);
+
+
+
+/* =====================================================
+   WINDOW RESIZE
+===================================================== */
+
+window.addEventListener(
+    'resize',
+    function () {
+
+
+        const width =
+            viewerContainer.clientWidth;
+
+
+        const height =
+            viewerContainer.clientHeight;
+
+
+        camera.aspect =
+            width /
+            height;
+
+
+        camera.updateProjectionMatrix();
+
+
+        renderer.setSize(
+            width,
+            height
+        );
+
+    }
+);
+
+
+
+/* =====================================================
+   ANIMATION
+===================================================== */
+
+function animate() {
+
+
+    requestAnimationFrame(
+        animate
+    );
+
+
+    controls.update();
+
+
+    renderer.render(
+        scene,
+        camera
+    );
+
+}
+
+
+animate();
+
+
+
+/* =====================================================
+   LOAD PERSON
+===================================================== */
+
+loadPerson();
+
+
+</script>
+
+
 </body>
-</html>
 
+</html>
+```
