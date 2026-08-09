@@ -2,532 +2,1256 @@
    AGLIPAY CEMETERY HELP DESK - INDEX STYLESHEET
    ============================================ */
 
+
 /* ---------- Google Fonts Import ---------- */
+
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
 
+
 /* ---------- CSS Variables / Theme Colors ---------- */
+
 :root {
     --primary: #2e6b3e;
     --primary-dark: #1e4d2b;
     --primary-light: #4a9e5e;
+
     --accent: #d4af37;
     --accent-light: #f0d68a;
+
     --dark: #1a1a2e;
     --dark-soft: #3a5a40;
+
     --text-muted: #5a7a5a;
     --text-subtle: #7a9a7a;
     --text-blend: #9ab89a;
+
     --gray: #6b8a6b;
     --gray-light: #dde8dd;
     --gray-bg: #edf4ed;
+
     --white: #ffffff;
+
     --glass-bg: rgba(255, 255, 255, 0.25);
     --glass-border: rgba(255, 255, 255, 0.35);
+
     --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
     --shadow-md: 0 8px 30px rgba(0,0,0,0.12);
     --shadow-lg: 0 15px 50px rgba(0,0,0,0.2);
+
     --radius: 12px;
     --radius-lg: 20px;
+
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* ---------- Reset & Base ---------- */
+
+/* ============================================
+   RESET & BASE
+   ============================================ */
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+
+html {
+    width: 100%;
+    min-width: 0;
+    overflow-x: hidden;
+}
+
+
 body {
     font-family: 'Poppins', Arial, sans-serif;
     background: var(--gray-bg);
-    min-width: 1280px;
+
+    /*
+       IMPORTANT:
+       Removed min-width: 1280px
+       so the website can properly fit mobile screens.
+    */
+
+    width: 100%;
+    min-width: 0;
+    overflow-x: hidden;
 }
 
-/* ---------- Container ---------- */
+
+/* ============================================
+   CONTAINER
+   ============================================ */
+
 .container {
     width: 100%;
-    max-width: none;
+    max-width: 1500px;
+
     margin: 0 auto;
+
     padding: 0 20px;
 }
 
-/* ---------- 3-Column Layout ---------- */
+
+/* ============================================
+   3-COLUMN LAYOUT
+   ============================================ */
+
 .layout {
     display: flex;
+
+    flex-direction: row;
+
     gap: 24px;
+
     align-items: flex-start;
+
+    width: 100%;
 }
 
-/* Left Aside */
+
+/* ---------- Left Aside ---------- */
+
 .aside-left {
     flex: 0 0 280px;
+    width: 280px;
     min-width: 0;
 }
 
-/* Center Column */
+
+/* ---------- Center Column ---------- */
+
 .center-col {
-    flex: 1;
+    flex: 1 1 auto;
+
     min-width: 0;
+
+    width: 100%;
 }
 
-/* Right Aside */
+
+/* ---------- Right Aside ---------- */
+
 .aside-right {
     flex: 0 0 240px;
+    width: 240px;
+
     min-width: 0;
 }
 
-/* ---------- Aside Shared Styles ---------- */
+
+/* ============================================
+   ASIDE SHARED STYLES
+   ============================================ */
+
 .aside-title {
     font-family: 'Playfair Display', serif;
+
     font-size: 2rem;
+
     color: var(--dark-soft);
+
     margin-bottom: 16px;
+
     padding-bottom: 8px;
+
     border-bottom: 5px solid var(--accent-light);
+
     letter-spacing: 0.5px;
 }
 
+
 .aside-card {
     background: var(--white);
+
     border-radius: var(--radius);
+
     padding: 12px 16px;
+
     margin-bottom: 12px;
+
     box-shadow: var(--shadow-sm);
+
     border: 1px solid var(--gray-light);
+
     font-size: 0.85rem;
+
     line-height: 1.6;
+
+    word-wrap: break-word;
 }
+
 
 .aside-card p {
     margin: 0;
 }
 
+
 .aside-card p strong {
     color: var(--primary-dark);
+
     font-size: 0.8rem;
+
     text-transform: uppercase;
+
     letter-spacing: 0.5px;
 }
 
-/* Legend dots */
+
+/* ============================================
+   LEGEND
+   ============================================ */
+
 .legend p {
     display: flex;
+
     align-items: center;
+
     gap: 8px;
 }
+
 
 .dot {
     width: 12px;
     height: 12px;
+
     border-radius: 50%;
+
     display: inline-block;
+
     flex-shrink: 0;
 }
+
 
 .dot-occupied {
     background: #2e6b3e;
 }
 
+
 .dot-available {
     background: #d4af37;
 }
 
-/* ---------- Header with Decorative Line ---------- */
+
+/* ============================================
+   HEADER
+   ============================================ */
+
+header {
+    position: relative;
+
+    padding: 40px 20px 60px;
+
+    margin-bottom: 30px;
+
+    background: rgba(246, 244, 244, 0.1);
+
+    width: 100%;
+}
+
+
 h1 {
     font-family: 'Playfair Display', serif;
+
     font-size: 4.5rem;
+
     font-weight: 700;
+
     text-align: center;
+
     color: var(--dark-soft);
+
     margin-bottom: 5px;
+
     letter-spacing: 1px;
+
     position: relative;
+
     padding-bottom: 15px;
 }
 
+
 h1::after {
     content: '';
+
     display: block;
+
     width: 80px;
+
     height: 3px;
-    background: linear-gradient(90deg, var(--accent), var(--primary-light));
+
+    background: linear-gradient(
+        90deg,
+        var(--accent),
+        var(--primary-light)
+    );
+
     margin: 12px auto 0;
+
     border-radius: 2px;
 }
 
+
 .subtitle {
     text-align: center;
+
     color: var(--text-muted);
+
     margin: 0 0 35px 0;
+
     font-size: 1rem;
+
     letter-spacing: 1px;
+
     text-transform: uppercase;
 }
 
-/* ---------- Search Box ---------- */
+
+/* ============================================
+   SEARCH BOX
+   ============================================ */
+
 .search-box {
     display: flex;
+
+    flex-direction: row;
+
     gap: 10px;
+
     margin-bottom: 30px;
+
     background: var(--white);
+
     padding: 6px 6px 6px 20px;
+
     border-radius: 50px;
+
     box-shadow: var(--shadow-md);
+
     border: 1px solid rgba(46, 107, 62, 0.1);
+
     transition: var(--transition);
+
+    width: 100%;
 }
+
 
 .search-box:focus-within {
     border-color: var(--primary-light);
-    box-shadow: 0 8px 30px rgba(46, 107, 62, 0.15);
+
+    box-shadow:
+        0 8px 30px rgba(46, 107, 62, 0.15);
+
     transform: translateY(-2px);
 }
+
 
 .search-box input {
     flex: 1;
+
+    min-width: 0;
+
     padding: 14px 10px;
+
     border: none;
+
     background: transparent;
+
     font-size: 16px;
+
     font-family: 'Poppins', sans-serif;
+
     color: var(--dark-soft);
+
     outline: none;
 }
 
+
 .search-box input::placeholder {
     color: #b0b0b0;
+
     font-weight: 300;
 }
 
+
 .search-box button {
     padding: 14px 32px;
+
     border: none;
-    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--primary),
+            var(--primary-dark)
+        );
+
     color: var(--white);
+
     border-radius: 50px;
+
     cursor: pointer;
+
     font-size: 15px;
+
     font-weight: 600;
+
     font-family: 'Poppins', sans-serif;
+
     letter-spacing: 0.5px;
+
     transition: var(--transition);
+
     white-space: nowrap;
-    box-shadow: 0 4px 15px rgba(46, 107, 62, 0.3);
+
+    box-shadow:
+        0 4px 15px rgba(46, 107, 62, 0.3);
 }
+
 
 .search-box button:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(46, 107, 62, 0.4);
-    background: linear-gradient(135deg, var(--primary-dark), #143a20);
+
+    box-shadow:
+        0 6px 20px rgba(46, 107, 62, 0.4);
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--primary-dark),
+            #143a20
+        );
 }
+
 
 .search-box button:active {
     transform: translateY(0);
 }
 
-/* ---------- Choices Container ---------- */
+
+/* ============================================
+   CHOICES CONTAINER
+   ============================================ */
+
 #choices {
     display: flex;
+
     flex-direction: column;
+
     gap: 12px;
+
     margin-bottom: 25px;
+
+    width: 100%;
 }
+
 
 #choices button,
 .choice-btn {
     background: var(--white);
+
     border: 1px solid var(--gray-light);
+
     border-left: 5px solid var(--primary-light);
+
     border-radius: var(--radius);
+
     padding: 20px 24px;
+
     text-align: left;
+
     cursor: pointer;
+
     font-size: 15px;
+
     font-family: 'Poppins', sans-serif;
+
     color: var(--dark-soft);
+
     transition: var(--transition);
+
     box-shadow: var(--shadow-sm);
+
     line-height: 1.6;
+
     width: 100%;
 }
 
+
 #choices button:hover,
 .choice-btn:hover {
-    background: linear-gradient(135deg, #f8fff8, #f0f7f0);
+    background:
+        linear-gradient(
+            135deg,
+            #f8fff8,
+            #f0f7f0
+        );
+
     border-left-width: 7px;
+
     border-left-color: var(--primary);
+
     transform: translateX(8px);
+
     box-shadow: var(--shadow-md);
 }
+
 
 #choices button strong,
 .choice-btn strong {
     font-size: 18px;
+
     color: var(--primary-dark);
+
     display: block;
+
     margin-bottom: 5px;
 }
 
-/* ---------- Result Card ---------- */
+
+/* ============================================
+   RESULT CARD
+   ============================================ */
+
 .result-card {
     background: var(--white);
+
     border-radius: var(--radius-lg);
+
     padding: 30px 35px;
+
     box-shadow: var(--shadow-lg);
+
     border: 1px solid rgba(46, 107, 62, 0.08);
+
     position: relative;
+
     overflow: hidden;
+
+    width: 100%;
 }
+
 
 .result-card::before {
     content: '';
+
     position: absolute;
+
     top: 0;
     left: 0;
     right: 0;
+
     height: 4px;
-    background: linear-gradient(90deg, var(--primary), var(--accent), var(--primary-light));
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--primary),
+            var(--accent),
+            var(--primary-light)
+        );
 }
+
 
 .result-card h2 {
     font-family: 'Playfair Display', serif;
+
     font-size: 1.6rem;
+
     color: var(--primary-dark);
+
     margin-bottom: 25px;
+
     padding-bottom: 15px;
+
     border-bottom: 2px dashed var(--gray-light);
+
     text-align: center;
 }
 
-/* ---------- Grave Details Grid ---------- */
+
+/* ============================================
+   GRAVE DETAILS
+   ============================================ */
+
 .info {
     display: grid;
+
     grid-template-columns: 1fr 1fr;
+
     gap: 12px;
+
+    width: 100%;
 }
+
 
 .info p {
     margin: 0;
+
     font-size: 15px;
+
     padding: 12px 16px;
+
     background: var(--gray-bg);
+
     border-radius: 8px;
+
     display: flex;
+
     flex-direction: column;
+
     gap: 4px;
+
+    min-width: 0;
 }
+
 
 .info p strong {
     font-size: 12px;
+
     text-transform: uppercase;
+
     letter-spacing: 1px;
+
     color: var(--gray);
+
     font-weight: 600;
 }
+
 
 .info p span {
     font-size: 16px;
+
     font-weight: 500;
+
     color: var(--dark-soft);
+
+    overflow-wrap: anywhere;
 }
 
-/* ---------- Map Button ---------- */
+
+/* ============================================
+   MAP BUTTON
+   ============================================ */
+
 .map-btn {
     width: 100%;
+
     margin-top: 25px;
+
     padding: 16px;
-    background: linear-gradient(135deg, #2c7be5, #1a5bbf);
+
+    background:
+        linear-gradient(
+            135deg,
+            #2c7be5,
+            #1a5bbf
+        );
+
     color: var(--white);
+
     border: none;
+
     border-radius: 50px;
+
     cursor: pointer;
+
     font-size: 16px;
+
     font-weight: 600;
+
     font-family: 'Poppins', sans-serif;
+
     letter-spacing: 0.5px;
+
     transition: var(--transition);
-    box-shadow: 0 4px 15px rgba(44, 123, 229, 0.3);
+
+    box-shadow:
+        0 4px 15px rgba(44, 123, 229, 0.3);
+
     display: flex;
+
     align-items: center;
+
     justify-content: center;
+
     gap: 10px;
 }
 
+
 .map-btn::before {
     content: '\01F4CD';
+
     font-size: 18px;
 }
 
+
 .map-btn:hover {
     transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(44, 123, 229, 0.4);
-    background: linear-gradient(135deg, #1a5bbf, #0f3f8a);
+
+    box-shadow:
+        0 8px 25px rgba(44, 123, 229, 0.4);
+
+    background:
+        linear-gradient(
+            135deg,
+            #1a5bbf,
+            #0f3f8a
+        );
 }
+
 
 .map-btn:active {
     transform: translateY(0);
 }
 
-/* ---------- Utility Classes ---------- */
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+
 .hidden {
     display: none !important;
 }
 
-/* ---------- Header BG Fade ---------- */
-header {
-    position: relative;
-    padding: 40px 20px 60px;
-    margin-bottom: 30px;
-    background: rgba(246, 244, 244, 0.1);
-    width: 100vw;
-    margin-left: calc(-50vw + 50%);
-    margin-right: calc(-50vw + 50%);
-    padding-left: calc(50vw - 50% + 20px);
-    padding-right: calc(50vw - 50% + 20px);
-}
+
+/* ============================================
+   HEADER FULL WIDTH
+   ============================================ */
 
 header::after {
     content: '';
+
     position: absolute;
+
     bottom: 0;
+
     left: 0;
+
     right: 0;
+
     height: 80px;
+
     pointer-events: none;
 }
 
+
+/* ============================================
+   FOOTER
+   ============================================ */
+
 footer {
     text-align: center;
+
     color: var(--dark-soft);
+
     font-size: 1.5rem;
+
     margin-top: 40px;
+
     padding: 20px 0;
+
+    width: 100%;
 }
 
-/* ---------- Loading Spinner ---------- */
+
+/* ============================================
+   LOADING SPINNER
+   ============================================ */
+
 .loading {
     text-align: center;
+
     padding: 20px;
+
     color: var(--gray);
 }
 
+
 .loading::after {
     content: '';
+
     display: inline-block;
+
     width: 20px;
+
     height: 20px;
+
     border: 3px solid var(--gray-light);
+
     border-top-color: var(--primary);
+
     border-radius: 50%;
+
     animation: spin 0.8s linear infinite;
+
     margin-left: 8px;
+
     vertical-align: middle;
 }
 
+
 @keyframes spin {
-    to { transform: rotate(360deg); }
-}
 
-/* ---------- Responsive Design ---------- */
-
-/* Tablet: collapse asides */
-@media (max-width: 1024px) {
-    .layout {
-        flex-direction: column;
+    to {
+        transform: rotate(360deg);
     }
 
-    .aside-left,
-    .aside-right {
-        flex: 0 0 auto;
+}
+
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+
+/* --------------------------------------------
+   LARGE DESKTOP
+   -------------------------------------------- */
+
+@media (min-width: 1400px) {
+
+    .container {
+        max-width: 1500px;
+    }
+
+}
+
+
+/* --------------------------------------------
+   TABLET
+   601px - 1024px
+
+   Layout becomes vertical.
+   -------------------------------------------- */
+
+@media (max-width: 1024px) {
+
+    .container {
+        width: 100%;
+
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+
+    .layout {
+        flex-direction: column;
+
+        gap: 30px;
+
         width: 100%;
     }
 
-    .aside-left #choices {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        gap: 10px;
+
+    .aside-left,
+    .center-col,
+    .aside-right {
+
+        width: 100%;
+
+        flex: 0 0 auto;
+
+        min-width: 0;
     }
 
-    .aside-left #choices button,
-    .aside-left .choice-btn {
-        flex: 1 1 200px;
-        padding: 14px 18px;
-        font-size: 14px;
+
+    .aside-left {
+        order: 1;
     }
 
-    .aside-right .aside-card {
-        display: inline-block;
-        width: auto;
-        margin-right: 10px;
-    }
-}
 
-/* Mobile */
-@media (max-width: 600px) {
-    .container {
-        width: 95%;
-        margin: 20px auto;
+    .center-col {
+        order: 2;
     }
 
-    h1 {
-        font-size: 1.8rem;
+
+    .aside-right {
+        order: 3;
     }
 
-    .subtitle {
-        font-size: 0.8rem;
-    }
 
-    .search-box {
+    /* Search results stay vertical */
+
+    #choices {
         flex-direction: column;
-        padding: 15px;
-        border-radius: var(--radius);
+    }
+
+
+    /* Cemetery info cards can sit beside
+       each other on tablet */
+
+    .aside-right {
+        display: grid;
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
         gap: 12px;
     }
 
-    .search-box input {
-        padding: 12px;
-        background: var(--gray-bg);
-        border-radius: 8px;
+
+    .aside-right .aside-title {
+        grid-column: 1 / -1;
     }
 
-    .search-box button {
+
+    .aside-right .aside-card {
+        margin-bottom: 0;
+    }
+
+}
+
+
+/* --------------------------------------------
+   MOBILE
+   600px and below
+   -------------------------------------------- */
+
+@media (max-width: 600px) {
+
+    html,
+    body {
         width: 100%;
-        padding: 14px;
+
+        min-width: 0;
+
+        overflow-x: hidden;
     }
 
-    .result-card {
-        padding: 20px;
+
+    .container {
+        width: 100%;
+
+        max-width: 100%;
+
+        padding-left: 15px;
+
+        padding-right: 15px;
     }
 
-    .info {
-        grid-template-columns: 1fr;
+
+    /* ----------------------------------------
+       HEADER
+       ---------------------------------------- */
+
+    header {
+        padding: 30px 10px 40px;
+
+        margin-bottom: 25px;
     }
 
-    .info p {
-        padding: 10px 14px;
+
+    h1 {
+        font-size: 2.5rem;
+
+        line-height: 1.15;
+
+        letter-spacing: 0.5px;
+
+        padding-bottom: 10px;
     }
+
+
+    h1::after {
+        width: 65px;
+
+        height: 3px;
+
+        margin-top: 10px;
+    }
+
+
+    .subtitle {
+        font-size: 0.8rem;
+
+        line-height: 1.5;
+
+        letter-spacing: 0.5px;
+
+        margin-bottom: 0;
+    }
+
+
+    /* ----------------------------------------
+       LAYOUT
+       ---------------------------------------- */
+
+    .layout {
+        flex-direction: column;
+
+        gap: 25px;
+
+        width: 100%;
+    }
+
+
+    .aside-left,
+    .center-col,
+    .aside-right {
+
+        width: 100%;
+
+        min-width: 0;
+
+        flex: 0 0 auto;
+    }
+
+
+    /* ----------------------------------------
+       SEARCH RESULTS
+       ---------------------------------------- */
+
+    .aside-title {
+        font-size: 1.6rem;
+
+        margin-bottom: 12px;
+
+        border-bottom-width: 4px;
+    }
+
+
+    #choices {
+        gap: 10px;
+
+        margin-bottom: 0;
+    }
+
 
     #choices button,
     .choice-btn {
-        padding: 14px 16px;
+
+        padding: 16px;
+
+        font-size: 14px;
+
+        line-height: 1.5;
+    }
+
+
+    #choices button strong,
+    .choice-btn strong {
+
+        font-size: 16px;
+    }
+
+
+    /* ----------------------------------------
+       SEARCH BOX
+       ---------------------------------------- */
+
+    .search-box {
+
+        flex-direction: row;
+
+        gap: 6px;
+
+        padding: 5px 5px 5px 12px;
+
+        border-radius: 40px;
+
+        margin-bottom: 20px;
+    }
+
+
+    .search-box input {
+
+        min-width: 0;
+
+        width: 100%;
+
+        padding: 12px 6px;
+
+        font-size: 14px;
+
+        background: transparent;
+
+        border-radius: 0;
+    }
+
+
+    .search-box button {
+
+        flex-shrink: 0;
+
+        width: auto;
+
+        padding: 12px 18px;
+
         font-size: 14px;
     }
 
-    .aside-right .aside-card {
-        display: block;
-        width: 100%;
-        margin-right: 0;
+
+    /* ----------------------------------------
+       RESULT CARD
+       ---------------------------------------- */
+
+    .result-card {
+
+        padding: 22px 18px;
+
+        border-radius: 16px;
     }
+
+
+    .result-card h2 {
+
+        font-size: 1.4rem;
+
+        margin-bottom: 18px;
+
+        padding-bottom: 12px;
+    }
+
+
+    /* ----------------------------------------
+       INFORMATION
+       ---------------------------------------- */
+
+    .info {
+
+        grid-template-columns: 1fr;
+
+        gap: 10px;
+    }
+
+
+    .info p {
+
+        padding: 11px 13px;
+
+        font-size: 14px;
+    }
+
+
+    .info p strong {
+
+        font-size: 11px;
+
+        letter-spacing: 0.8px;
+    }
+
+
+    .info p span {
+
+        font-size: 15px;
+    }
+
+
+    /* ----------------------------------------
+       MAP BUTTON
+       ---------------------------------------- */
+
+    .map-btn {
+
+        margin-top: 20px;
+
+        padding: 14px;
+
+        font-size: 15px;
+    }
+
+
+    /* ----------------------------------------
+       CEMETERY INFORMATION
+       ---------------------------------------- */
+
+    .aside-right {
+
+        display: block;
+
+        width: 100%;
+    }
+
+
+    .aside-right .aside-title {
+
+        width: 100%;
+    }
+
+
+    .aside-right .aside-card {
+
+        display: block;
+
+        width: 100%;
+
+        margin-bottom: 10px;
+    }
+
+
+    /* ----------------------------------------
+       FOOTER
+       ---------------------------------------- */
+
+    footer {
+
+        font-size: 0.9rem;
+
+        margin-top: 30px;
+
+        padding: 15px 0 25px;
+
+        line-height: 1.5;
+    }
+
 }
 
-@media (min-width: 601px) and (max-width: 900px) {
+
+/* --------------------------------------------
+   VERY SMALL PHONES
+   360px and below
+   -------------------------------------------- */
+
+@media (max-width: 360px) {
+
     .container {
-        width: 88%;
+        padding-left: 12px;
+
+        padding-right: 12px;
     }
 
-    h1 {
-        font-size: 2.2rem;
+
+    header {
+        padding-left: 5px;
+
+        padding-right: 5px;
     }
+
+
+    h1 {
+        font-size: 2.15rem;
+    }
+
+
+    .subtitle {
+        font-size: 0.72rem;
+    }
+
+
+    .search-box {
+        padding-left: 10px;
+
+        gap: 4px;
+    }
+
+
+    .search-box input {
+        font-size: 13px;
+
+        padding-left: 4px;
+    }
+
+
+    .search-box button {
+        padding: 11px 14px;
+
+        font-size: 13px;
+    }
+
+
+    .result-card {
+        padding: 18px 14px;
+    }
+
 }
