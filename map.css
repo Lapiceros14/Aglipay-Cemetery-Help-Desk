@@ -48,7 +48,7 @@ body {
    ============================================ */
 
 .hidden {
-    display: none !important;
+    display: none;
 }
 
 
@@ -266,91 +266,48 @@ body {
 
 .person-detail {
     padding: 18px 20px;
-
     flex: 1;
-
-    min-height: 0;
 }
-
 
 .person-detail .name-title {
     font-family: 'Playfair Display', serif;
-
     font-size: 1.15rem;
-
     color: #1e4d2b;
-
     margin-bottom: 14px;
-
     padding-bottom: 10px;
-
     border-bottom: 2px dashed #dde8dd;
-
     word-break: break-word;
-
-    line-height: 1.35;
 }
-
-
-/* ============================================
-   DETAIL LIST
-   ============================================ */
 
 .detail-list {
     display: flex;
-
     flex-direction: column;
-
     gap: 8px;
 }
 
-
 .detail-row {
     display: flex;
-
     justify-content: space-between;
-
     align-items: center;
-
-    gap: 15px;
-
     padding: 8px 12px;
-
     background: #edf4ed;
-
     border-radius: 8px;
-
     font-size: 0.85rem;
-
-    min-width: 0;
 }
-
 
 .detail-row .label {
     color: #6b8a6b;
-
     font-weight: 600;
-
     font-size: 0.7rem;
-
     text-transform: uppercase;
-
     letter-spacing: 0.5px;
-
-    flex-shrink: 0;
 }
-
 
 .detail-row .value {
     color: #1a1a2e;
-
     font-weight: 500;
-
     text-align: right;
-
-    overflow-wrap: anywhere;
 }
-
 
 /* ============================================
    EMPTY STATE
